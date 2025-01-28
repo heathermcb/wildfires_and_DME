@@ -1,0 +1,556 @@
+---
+title: "Results tables"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+library(wesanderson)
+filenames <- list.files(
+  here("analysis", "pm_analyses", "results"),
+  pattern = "*.RDS",
+  full.names = TRUE
+)
+all_pm_models <- lapply(X = filenames, FUN = readRDS)
+```
+
+# Weekly lags
+
+```{r}
+# function to calculate a RR and confidence interval from one of our
+# neg bin gams, and output them in 3 length 3 vectors: RR, lw, up.
+week_RR_vectors <- function(weekly_model) {
+  RR_week1 <- sprintf("%04.2f", round(exp(weekly_model$coefficients[[2]]) ^ 10, digits = 2))
+  RR_week2 <- sprintf("%04.2f", round(exp(weekly_model$coefficients[[3]]) ^ 10, digits = 2))
+  RR_week3 <- sprintf("%04.2f", round(exp(weekly_model$coefficients[[4]]) ^ 10, digits = 2))
+  lw_week1 <-
+    sprintf("%04.2f",round(exp(weekly_model$coefficients[[2]] - sqrt(vcov(weekly_model)[2, 2]) * 1.96) ^
+    10, digits = 2))
+  up_week1 <-
+    sprintf("%04.2f",round(exp(weekly_model$coefficients[[2]] + sqrt(vcov(weekly_model)[2, 2]) * 1.96) ^
+    10, digits = 2))
+  lw_week2 <-
+    sprintf("%04.2f",round(exp(weekly_model$coefficients[[3]] - sqrt(vcov(weekly_model)[3, 3]) * 1.96) ^
+    10, digits = 2))
+  up_week2 <-
+    sprintf("%04.2f",round(exp(weekly_model$coefficients[[3]] + sqrt(vcov(weekly_model)[3, 3]) * 1.96) ^
+    10, digits = 2))
+  lw_week3 <-
+    sprintf("%04.2f",round(exp(weekly_model$coefficients[[4]] - sqrt(vcov(weekly_model)[4, 4]) * 1.96) ^
+    10, digits = 2))
+  up_week3 <-
+    sprintf("%04.2f",round(exp(weekly_model$coefficients[[4]] + sqrt(vcov(weekly_model)[4, 4]) * 1.96) ^
+    10, digits = 2))
+  lag_week_1 <- paste0(RR_week1, ' [', lw_week1, ', ', up_week1, ']')
+  lag_week_2 <- paste0(RR_week2, ' [', lw_week2, ', ', up_week2, ']')
+  lag_week_3 <- paste0(RR_week3, ' [', lw_week3, ', ', up_week3, ']')
+  all <- c(lag_week_1, lag_week_2, lag_week_3)
+  return(all)
+}
+```
+
+
+
+```{r}
+# identify main 3 week lag models
+week_penalized_spline_outpatient <- all_pm_models[[18]]
+week_penalized_spline_inpatient <- all_pm_models[[10]]
+week_penalized_spline_ED <- all_pm_models[[2]]
+week_penalized_spline_inpatient_cardioresp <- all_pm_models[[12]]
+week_penalized_spline_ED_cardioresp <- all_pm_models[[4]]
+
+# make table of results
+s1 <- week_RR_vectors(week_penalized_spline_outpatient)
+s2 <- week_RR_vectors(week_penalized_spline_inpatient)
+s3 <- week_RR_vectors(week_penalized_spline_ED)
+s4 <- week_RR_vectors(week_penalized_spline_inpatient_cardioresp)
+s5 <- week_RR_vectors(week_penalized_spline_ED_cardioresp)
+
+weekly_lags_penalized_spline <- rbind(s1, s2, s3, s4, s5)
+colnames(weekly_lags_penalized_spline) <-
+  c('lag 0 weeks', 'lag 1 week', 'lag 2 weeks')
+
+knitr::kable(weekly_lags_penalized_spline)
+
+# sensitivity analysis week lag models
+week_ns_outpatient <- all_pm_models[[17]]
+week_ns_inpatient <- all_pm_models[[9]]
+week_ns_ED <- all_pm_models[[1]]
+week_ns_inpatient_cardioresp <- all_pm_models[[11]]
+week_ns_ED_cardioresp <- all_pm_models[[3]]
+
+t1 <- week_RR_vectors(week_ns_outpatient)
+t2 <- week_RR_vectors(week_ns_inpatient)
+t3 <- week_RR_vectors(week_ns_ED)
+t4 <- week_RR_vectors(week_ns_inpatient_cardioresp)
+t5 <- week_RR_vectors(week_ns_ED_cardioresp)
+
+weekly_lags_natural_spline <- rbind(t1, t2, t3, t4, t5)
+colnames(weekly_lags_natural_spline) <-
+  c('lag 0 weeks', 'lag 1 week', 'lag 2 weeks')
+
+knitr::kable(weekly_lags_natural_spline)
+```
+
+
+# Daily lags
+
+```{r}
+# function to calculate a RR and confidence interval from one of our
+# neg bin gams, and output them in 3 length 3 vectors: RR, lw, up.
+day_RR_vectors <- function(daily_model) {
+  RR_day1 <- round(exp(daily_model$coefficients[[2]]) ^ 10, digits = 2)
+  RR_day2 <- round(exp(daily_model$coefficients[[3]]) ^ 10, digits = 2)
+  RR_day3 <- round(exp(daily_model$coefficients[[4]]) ^ 10, digits = 2)
+  RR_day4 <- round(exp(daily_model$coefficients[[5]]) ^ 10, digits = 2)
+  RR_day5 <- round(exp(daily_model$coefficients[[6]]) ^ 10, digits = 2)
+  RR_day6 <- round(exp(daily_model$coefficients[[7]]) ^ 10, digits = 2)
+  RR_day7 <- round(exp(daily_model$coefficients[[8]]) ^ 10, digits = 2)
+  lw_day1 <-
+    round(exp(daily_model$coefficients[[2]] - sqrt(vcov(daily_model)[2, 2]) * 1.96) ^
+    10, digits = 2)
+  up_day1 <-
+    round(exp(daily_model$coefficients[[2]] + sqrt(vcov(daily_model)[2, 2]) * 1.96) ^
+    10, digits = 2)
+  lw_day2 <-
+    round(exp(daily_model$coefficients[[3]] - sqrt(vcov(daily_model)[3, 3]) * 1.96) ^
+    10, digits = 2)
+  up_day2 <-
+    round(exp(daily_model$coefficients[[3]] + sqrt(vcov(daily_model)[3, 3]) * 1.96) ^
+    10, digits = 2)
+  lw_day3 <-
+    round(exp(daily_model$coefficients[[4]] - sqrt(vcov(daily_model)[4, 4]) * 1.96) ^
+    10, digits = 2)
+  up_day3 <-
+    round(exp(daily_model$coefficients[[4]] + sqrt(vcov(daily_model)[4, 4]) * 1.96) ^
+    10, digits = 2)
+  lw_day4 <-
+    round(exp(daily_model$coefficients[[5]] - sqrt(vcov(daily_model)[5, 5]) * 1.96) ^
+    10, digits = 2)
+  up_day4 <-
+    round(exp(daily_model$coefficients[[5]] + sqrt(vcov(daily_model)[5, 5]) * 1.96) ^
+    10, digits = 2)
+  lw_day5 <-
+    round(exp(daily_model$coefficients[[6]] - sqrt(vcov(daily_model)[6, 6]) * 1.96) ^
+    10, digits = 2)
+  up_day5 <-
+    round(exp(daily_model$coefficients[[6]] + sqrt(vcov(daily_model)[6, 6]) * 1.96) ^
+    10, digits = 2)
+  lw_day6 <-
+    round(exp(daily_model$coefficients[[7]] - sqrt(vcov(daily_model)[7, 7]) * 1.96) ^
+    10, digits = 2)
+  up_day6 <-
+    round(exp(daily_model$coefficients[[7]] + sqrt(vcov(daily_model)[7, 7]) * 1.96) ^
+    10, digits = 2)
+  lw_day7 <-
+    round(exp(daily_model$coefficients[[8]] - sqrt(vcov(daily_model)[8, 8]) * 1.96) ^
+    10, digits = 2)
+  up_day7 <-
+    round(exp(daily_model$coefficients[[8]] + sqrt(vcov(daily_model)[8, 8]) * 1.96) ^
+    10, digits = 2)
+  
+  lag_day_1 <- paste0(RR_day1, ' [', lw_day1, ', ', up_day1, ']')
+  lag_day_2 <- paste0(RR_day2, ' [', lw_day2, ', ', up_day2, ']')
+  lag_day_3 <- paste0(RR_day3, ' [', lw_day3, ', ', up_day3, ']')
+  lag_day_4 <- paste0(RR_day4, ' [', lw_day4, ', ', up_day4, ']')
+  lag_day_5 <- paste0(RR_day5, ' [', lw_day5, ', ', up_day5, ']')
+  lag_day_6 <- paste0(RR_day6, ' [', lw_day6, ', ', up_day6, ']')
+  lag_day_7 <- paste0(RR_day7, ' [', lw_day7, ', ', up_day7, ']')
+  all <- c(lag_day_1, lag_day_2, lag_day_3, lag_day_4, lag_day_5, 
+           lag_day_6, lag_day_7)
+  return(all)
+}
+```
+
+```{r}
+# identify main daily lag models
+penalized_spline_outpatient <- all_pm_models[[20]]
+penalized_spline_inpatient <- all_pm_models[[16]]
+penalized_spline_ED <- all_pm_models[[8]]
+penalized_spline_inpatient_cardioresp <- all_pm_models[[14]]
+penalized_spline_ED_cardioresp <- all_pm_models[[6]]
+
+# make table of results
+s1 <- day_RR_vectors(penalized_spline_outpatient)
+s2 <- day_RR_vectors(penalized_spline_inpatient)
+s3 <- day_RR_vectors(penalized_spline_ED)
+s4 <- day_RR_vectors(penalized_spline_inpatient_cardioresp)
+s5 <- day_RR_vectors(penalized_spline_ED_cardioresp)
+
+daily_lags_penalized_spline <- rbind(s1, s2, s3, s4, s5)
+colnames(daily_lags_penalized_spline) <-
+  c('lag 0 days', 'lag 1 day', 'lag 2 days', 'lag 3 days',
+    'lag 4 days', 'lag 5 days', 'lag 6 days')
+
+knitr::kable(daily_lags_penalized_spline)
+
+# sensitivity analysis day lag models
+ns_outpatient <- all_pm_models[[19]]
+ns_inpatient <- all_pm_models[[15]]
+ns_ED <- all_pm_models[[7]]
+ns_inpatient_cardioresp <- all_pm_models[[13]]
+ns_ED_cardioresp <- all_pm_models[[5]]
+
+t1 <- day_RR_vectors(ns_outpatient)
+t2 <- day_RR_vectors(ns_inpatient)
+t3 <- day_RR_vectors(ns_ED)
+t4 <- day_RR_vectors(ns_inpatient_cardioresp)
+t5 <- day_RR_vectors(ns_ED_cardioresp)
+
+daily_lags_natural_spline <- rbind(t1, t2, t3, t4, t5)
+colnames(daily_lags_natural_spline) <-
+  c('lag 0 days', 'lag 1 day', 'lag 2 days', 'lag 3 days',
+    'lag 4 days', 'lag 5 days', 'lag 6 days')
+
+knitr::kable(daily_lags_natural_spline)
+
+```
+
+# DID wildfire exposure stuff. 
+
+```{r}
+# function to produce proximity results tables
+DID_RR_vectors <- function(fire_exposure_model) {
+  did_rr <- sprintf("%04.2f",round(exp(fire_exposure_model$coefficients[4]), digits = 2))
+  did_lw <- sprintf("%04.2f",round(exp(fire_exposure_model$coefficients[4] - sqrt(vcov(fire_exposure_model)[4, 4]) * 1.96), digits = 2))
+  did_up <- sprintf("%04.2f",round(exp(fire_exposure_model$coefficients[4] + sqrt(vcov(fire_exposure_model)[4, 4]) * 1.96), digits = 2))
+  did_row <- paste0(did_rr, ' [', did_lw, ', ', did_up, ']')
+  return(did_row)
+}
+```
+
+
+```{r}
+filenames <- list.files(
+  here("analysis", "proximity_analyses", "new_results_may28"),
+  pattern = "*.RDS",
+  full.names = TRUE
+)
+all_proximity_models <- lapply(X = filenames, FUN = readRDS)
+
+filenames <- list.files(
+  here("analysis", "proximity_analyses", "sensitivity_results"),
+  pattern = "*.RDS",
+  full.names = TRUE
+)
+s <- lapply(X = filenames, FUN = readRDS)
+
+
+woolsey_fire_outpatient <- all_proximity_models[[20]]
+woolsey_fire_inpatient <- all_proximity_models[[18]]
+woolsey_fire_ED <- all_proximity_models[[14]]
+woolsey_fire_inpatient_cardioresp <- all_proximity_models[[16]]
+woolsey_fire_ED_cardioresp <- all_proximity_models[[12]]
+
+woolsey_evac_outpatient <- all_proximity_models[[19]]
+woolsey_evac_inpatient <- all_proximity_models[[17]]
+woolsey_evac_ED <- all_proximity_models[[13]]
+woolsey_evac_inpatient_cardioresp <- all_proximity_models[[15]]
+woolsey_evac_ED_cardioresp <- all_proximity_models[[11]]
+
+getty_fire_outpatient <- all_proximity_models[[10]]
+getty_fire_inpatient <- all_proximity_models[[8]]
+getty_fire_ED <- all_proximity_models[[4]]
+getty_fire_inpatient_cardioresp <- all_proximity_models[[6]]
+getty_fire_ED_cardioresp <- all_proximity_models[[2]]
+
+getty_evac_outpatient <- all_proximity_models[[9]]
+getty_evac_inpatient <- all_proximity_models[[7]]
+getty_evac_ED <- all_proximity_models[[3]]
+getty_evac_inpatient_cardioresp <- all_proximity_models[[5]]
+getty_evac_ED_cardioresp <- all_proximity_models[[1]]
+
+```
+
+
+
+```{r}
+# sensitivity tables
+woolsey_evac_outpatient_sensitivity <- s[[19]]
+woolsey_evac_inpatient_sensitivity <- s[[17]]
+woolsey_evac_ED_sensitivity <- s[[13]]
+woolsey_evac_inpatient_cardioresp_sensitivity <- s[[15]]
+woolsey_evac_ED_cadioresp_sensitivity <- s[[11]]
+
+woolsey_fire_outpatient_sensitivity <- s[[20]]
+woolsey_fire_inpatient_sensitivity <- s[[18]]
+woolsey_fire_ED_sensitivity <- s[[14]]
+woolsey_fire_inpatient_cardioresp_sensitivity <- s[[16]]
+woolsey_fire_ED_cardioresp_sensitivity <- s[[12]]
+
+getty_evac_outpatient_sensitivity <- s[[9]]
+getty_evac_inpatient_sensitivity <- s[[7]]
+getty_evac_ED_sensitivity <- s[[3]]
+getty_evac_inpatient_cardioresp_sensitivity <- s[[5]]
+getty_evac_ED_cadioresp_sensitivity <- s[[1]]
+
+getty_fire_outpatient_sensitivity <- s[[10]]
+getty_fire_inpatient_sensitivity <- s[[8]]
+getty_fire_ED_sensitivity <- s[[4]]
+getty_fire_inpatient_cardioresp_sensitivity <- s[[6]]
+getty_fire_ED_cardioresp_sensitivity <- s[[2]]
+
+# woolsey sensitivity tables
+sens1 <- DID_RR_vectors(woolsey_evac_outpatient_sensitivity)
+sens2 <- DID_RR_vectors(woolsey_evac_inpatient_sensitivity)
+sens3 <- DID_RR_vectors(woolsey_evac_ED_sensitivity)
+sens4 <- DID_RR_vectors(woolsey_evac_inpatient_cardioresp_sensitivity)
+sens5 <- DID_RR_vectors(woolsey_evac_ED_cadioresp_sensitivity)
+
+woolsey_evac_sensitivity <- rbind(sens1, sens2, sens3, sens4, sens5)
+knitr::kable(woolsey_evac_sensitivity)
+
+# woolsey tables
+# q1 <- DID_RR_vectors(woolsey_both_outpatient)
+# q2 <- DID_RR_vectors(woolsey_both_inpatient)
+# q3 <- DID_RR_vectors(woolsey_both_ED)
+# q4 <- DID_RR_vectors(woolsey_both_inpatient_cardioresp)
+# q5 <- DID_RR_vectors(woolsey_both_ED_cardioresp)
+# 
+# woolsey_fire_both <- rbind(q1, q2, q3, q4, q5)
+# knitr::kable(woolsey_fire_both)
+
+s1 <- DID_RR_vectors(woolsey_evac_outpatient)
+s2 <- DID_RR_vectors(woolsey_evac_inpatient)
+s3 <- DID_RR_vectors(woolsey_evac_ED)
+s4 <- DID_RR_vectors(woolsey_evac_inpatient_cardioresp)
+s5 <- DID_RR_vectors(woolsey_evac_ED_cardioresp)
+
+woolsey_fire_evac <- rbind(s1, s2, s3, s4, s5)
+knitr::kable(woolsey_fire_evac)
+
+sens11 <- DID_RR_vectors(woolsey_fire_outpatient_sensitivity)
+sens22 <- DID_RR_vectors(woolsey_fire_inpatient_sensitivity)
+sens33 <- DID_RR_vectors(woolsey_fire_ED_sensitivity)
+sens44 <- DID_RR_vectors(woolsey_fire_inpatient_cardioresp_sensitivity)
+sens55 <- DID_RR_vectors(woolsey_fire_ED_cardioresp_sensitivity)
+
+woolsey_fire_sensitivity <- rbind(sens11, sens22, sens33, sens44, sens55)
+knitr::kable(woolsey_fire_sensitivity)
+
+
+
+
+t1 <- DID_RR_vectors(woolsey_fire_outpatient)
+t2 <- DID_RR_vectors(woolsey_fire_inpatient)
+t3 <- DID_RR_vectors(woolsey_fire_ED)
+t4 <- DID_RR_vectors(woolsey_fire_inpatient_cardioresp)
+t5 <- DID_RR_vectors(woolsey_fire_ED_cardioresp)
+
+woolsey_fire_only <- rbind(t1, t2, t3, t4, t5)
+knitr::kable(woolsey_fire_only)
+
+# getty fire sensitivity
+gs11 <- DID_RR_vectors(getty_fire_outpatient_sensitivity)
+gs22 <- DID_RR_vectors(getty_fire_inpatient_sensitivity)
+gs33 <- DID_RR_vectors(getty_fire_ED_sensitivity)
+gs44 <- DID_RR_vectors(getty_fire_inpatient_cardioresp_sensitivity)
+gs55 <- DID_RR_vectors(getty_fire_ED_cardioresp_sensitivity)
+
+getty_fire_sensitivity <- rbind(gs11, gs22, gs33, gs44, gs55)
+knitr::kable(getty_fire_sensitivity)
+
+# getty evac sensitivity
+ge11 <- DID_RR_vectors(getty_evac_outpatient_sensitivity)
+ge22 <- DID_RR_vectors(getty_evac_inpatient_sensitivity)
+ge33 <- DID_RR_vectors(getty_evac_ED_sensitivity)
+ge44 <- DID_RR_vectors(getty_evac_inpatient_cardioresp_sensitivity)
+ge55 <- DID_RR_vectors(getty_evac_ED_cadioresp_sensitivity)
+
+getty_evac_sensitivity <- rbind(ge11, ge22, ge33, ge44, ge55)
+knitr::kable(getty_evac_sensitivity)
+
+# getty tables
+v1 <- DID_RR_vectors(getty_evac_outpatient)
+v2 <- DID_RR_vectors(getty_evac_inpatient)
+v3 <- DID_RR_vectors(getty_evac_ED)
+v4 <- DID_RR_vectors(getty_evac_inpatient_cardioresp)
+v5 <- DID_RR_vectors(getty_evac_ED_cardioresp)
+
+getty_fire_evac <- rbind(v1, v2, v3, v4, v5)
+knitr::kable(getty_fire_evac)
+
+w1 <- DID_RR_vectors(getty_fire_outpatient)
+w2 <- DID_RR_vectors(getty_fire_inpatient)
+w3 <- DID_RR_vectors(getty_fire_ED)
+w4 <- DID_RR_vectors(getty_fire_inpatient_cardioresp)
+w5 <- DID_RR_vectors(getty_fire_ED_cardioresp)
+
+getty_fire_only <- rbind(w1, w2, w3, w4, w5)
+knitr::kable(getty_fire_only)
+
+```
+
+```{r}
+add_case_name <- function(fire_dataframe, casename){
+  fire_dataframe <- fire_dataframe %>%
+    mutate(Exposure = paste0(casename))
+  return(fire_dataframe)
+}
+
+
+woolsey_fire_evac <-
+  add_case_name(as.data.frame(woolsey_fire_evac), 'Woolsey Fire evacuation zone + 10 km')
+woolsey_fire_only <-
+  add_case_name(as.data.frame(woolsey_fire_only), 'Woolsey Fire boundary + 20 km')
+getty_fire_evac <-
+  add_case_name(as.data.frame(getty_fire_evac), 'Getty Fire evacuation zone + 10 km')
+getty_fire_only<-
+  add_case_name(as.data.frame(getty_fire_only), 'Getty Fire boundary + 20 km')
+
+# create plot Joan wanted.
+all_fires <- rbind(woolsey_fire_evac,
+                   woolsey_fire_only, 
+                   getty_fire_evac, 
+                   getty_fire_only)
+all_fires <- all_fires %>% mutate(RR = as.numeric(substr(V1, start = 1, stop = 4)),
+                                  lw = as.numeric(substr(V1, start = 7, stop = 10)), 
+                                  up = as.numeric(substr(V1, start = 13, stop = 16)))
+all_fires <- all_fires %>% group_by(Exposure) %>% mutate(visit_type = row_number())
+
+```
+
+```{r}
+woolsey <- all_fires[1:10,]
+pd <- position_dodge(0.8)
+woolsey %>% ggplot(aes(x = visit_type, y = RR, 
+                       shape = Exposure)) + geom_point(position = pd) +
+  geom_errorbar(aes(ymin = lw, ymax = up), position = pd) + 
+  ylab("RR for difference in differences estimator") + 
+  xlab("Healthcare visit type") +
+  geom_hline(aes(yintercept = 1), linetype = 'dashed')
+```
+
+```{r}
+getty <- all_fires[11:20,]
+pd <- position_dodge(0.8)
+getty %>% ggplot(aes(x = visit_type, y = RR, 
+                       shape = Exposure)) + geom_point(position = pd) +
+  geom_errorbar(aes(ymin = lw, ymax = up), position = pd) + 
+  ylab("RR for difference in differences estimator") + 
+  xlab("Healthcare visit type") +
+  geom_hline(aes(yintercept = 1), linetype = 'dashed')
+```
+
+```{r}
+getty <- all_fires[11:20,] %>% mutate(visit_type = as.factor(visit_type))
+
+write_rds(getty, file = "/Users/heathermcbrien/Library/Mobile Documents/com~apple~CloudDocs/AT HOME AND AT WORK/dept_seminar_talk/gettydata.RDS")
+getty <- getty %>% mutate(visit_type = fct_relevel(c('5', '3', '4', '1', '2')))
+
+
+
+pd <- position_dodge(0.8)
+getty %>% ggplot(aes(x = RR, y = visit_type)) + 
+  geom_point(position = ggstance::position_dodgev(0.8), size = 7) +
+  geom_errorbar(aes(xmin = lw, xmax = up), position = ggstance::position_dodgev(0.8),
+                size = 1.5) + 
+  xlab("RR for exposure to fire or evacution with 95% CI") + 
+  ylab("Healthcare visit type") +
+   scale_x_log10() +
+  geom_vline(aes(xintercept = 1), linetype = 'dashed', color = 'red', size = 1.2) +
+  theme_minimal(base_size = 30) +
+  theme(axis.text.x = element_text(size = 30),
+        axis.text.y = element_blank()) +
+  #scale_color_viridis(discrete = TRUE, option = "B") +
+  theme(legend.position = 'none') +
+  facet_wrap(~Exposure)
+  # scale_color_manual(values = c(`1` = "cadetblue",
+  #                               `2` = "darkolivegreen",
+  #                               `3` = "darkorchid",
+  #                               `4` = "red",
+  #                               `5` = 'orange')) 
+  #scale_color_manual(values = wes_palette("Zissou1", 5, type = c("discrete")))# + 
+  
+ggsave(filename = here("writing", "figures", "automated_results_tables", "getty_fire_RR_plot.pdf"), width = 17, height = 8.5) 
+```
+
+```{r}
+library(forcats)
+woolsey <- woolsey %>% mutate(visit_type = fct_relevel(c('5', '3', '4', '1', '2')))
+write_rds(woolsey, file = "/Users/heathermcbrien/Library/Mobile Documents/com~apple~CloudDocs/AT HOME AND AT WORK/dept_seminar_talk/woolseydata.RDS")
+
+woolsey %>% ggplot(aes(x = RR, y = visit_type)) + 
+  geom_point(position = ggstance::position_dodgev(0.8), size = 7) +
+  geom_errorbar(aes(xmin = lw, xmax = up), position = ggstance::position_dodgev(0.8),
+                size = 1.5) + 
+  xlab("RR for exposure to fire or evacution with 95% CI") + 
+  ylab("Healthcare visit type") +
+   scale_x_log10() +
+  geom_vline(aes(xintercept = 1), linetype = 'dashed', color = 'red', size = 1.2) +
+  theme_minimal(base_size = 30) +
+  theme(axis.text.x = element_text(size = 30),
+        axis.text.y = element_blank()) +
+  #scale_color_viridis(discrete = TRUE, option = "B") +
+  theme(legend.position = 'none') +
+  facet_wrap(~Exposure)
+  # scale_color_manual(values = c(`1` = "cadetblue",
+  #                               `2` = "darkolivegreen",
+  #                               `3` = "darkorchid",
+  #                               `4` = "red",
+  #                               `5` = 'orange')) 
+  #scale_color_manual(values = wes_palette("Zissou1", 5, type = c("discrete")))# + 
+  
+ggsave(filename = here("writing", "figures", "automated_results_tables", "woolsey_fire_RR_plot.pdf"), width = 17, height = 8.5) 
+```
+
+
+
+```{r}
+woolsey <-
+  all_fires[1:10, ] %>% mutate(visit_type = as.factor(visit_type))
+pd <- position_dodge(0.8)
+woolsey %>% ggplot(aes(
+  x = RR,
+  y = visit_type,
+  shape = Exposure,
+  color = visit_type
+)) +
+  scale_x_log10() +
+  geom_point(
+    position = ggstance::position_dodgev(0.8),
+    size = 7,
+    aes(color = visit_type)
+  ) +
+  geom_errorbar(aes(xmin = lw, xmax = up),
+                position = ggstance::position_dodgev(0.8),
+                size = 1.5) +
+  xlab("RR for exposure to fire or evacution with 95% CI") +
+  ylab("Healthcare visit type") +
+  geom_vline(
+    aes(xintercept = 1),
+    linetype = 'dashed',
+    color = 'red',
+    size = 1.2
+  ) +
+  theme_minimal(base_size = 30) +
+  theme(axis.text.x = element_text(size = 30),
+        axis.text.y = element_blank()) +
+  facet_wrap(~Exposure) 
+  
+  #scale_color_viridis(discrete = TRUE, option = "B") +
+  # scale_color_manual(
+  #   values = c(
+  #    `1` = "cadetblue",
+  #                               `2` = "darkolivegreen",
+  #                               `3` = "darkorchid",
+  #                               `4` = "red",
+  #                               `5` = 'orange')
+
+
+
+ggsave(
+  filename = here(
+    "writing",
+    "figures",
+    "automated_results_tables",
+    "woolsey_fire_RR_plot.pdf"
+  ),
+  width = 17,
+  height = 8.5
+) 
+```

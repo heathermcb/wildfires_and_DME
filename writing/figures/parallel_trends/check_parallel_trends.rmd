@@ -1,0 +1,101 @@
+---
+title: ""
+output: pdf_document
+header-includes:
+- \usepackage{setspace}
+- \onehalfspacing
+- \usepackage{float}
+- \usepackage{caption}
+- \usepackage{lscape}
+- \newcommand{\blandscape}{\begin{landscape}}
+- \newcommand{\elandscape}{\end{landscape}}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+*The following are plots of mean weekly visits of each type throughout the study period. Red and blue lines represent mean visits in areas exposed to the Getty Fire and Woolsey Fire respectively, while black lines are respective unexposed areas. We concluded that the parallel trends assumption held in all cases.*
+
+
+```{r, out.width="50%"}
+knitr::include_graphics(
+  path = "/Users/heathermcbrien/Documents/kaiser_wildfires/data_processing/rmd_data_checks/s1.pdf",
+  auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE),
+  dpi = NULL,
+  error = getOption("knitr.graphics.error", TRUE))
+knitr::include_graphics(
+  path = "/Users/heathermcbrien/Documents/kaiser_wildfires/data_processing/rmd_data_checks/s2.pdf",
+  auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE),
+  dpi = NULL,
+  error = getOption("knitr.graphics.error", TRUE)
+)
+```
+
+
+
+```{r, out.width="50%"}
+knitr::include_graphics(
+  path = "/Users/heathermcbrien/Documents/kaiser_wildfires/data_processing/rmd_data_checks/s3.pdf",
+  auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE),
+  dpi = NULL,
+  error = getOption("knitr.graphics.error", TRUE))
+knitr::include_graphics(
+  path = "/Users/heathermcbrien/Documents/kaiser_wildfires/data_processing/rmd_data_checks/s4.pdf",
+  auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE),
+  dpi = NULL,
+  error = getOption("knitr.graphics.error", TRUE))
+
+```
+
+```{r, out.width="70%"}
+
+```
+
+```{r, out.width="50%"}
+knitr::include_graphics(
+  path = "/Users/heathermcbrien/Documents/kaiser_wildfires/data_processing/rmd_data_checks/s5.pdf",
+  auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE),
+  dpi = NULL,
+  error = getOption("knitr.graphics.error", TRUE))
+knitr::include_graphics(
+  path = "/Users/heathermcbrien/Documents/kaiser_wildfires/data_processing/rmd_data_checks/s6.pdf",
+  auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE),
+  dpi = NULL,
+  error = getOption("knitr.graphics.error", TRUE))
+
+
+```
+
+
+
+```{r, out.width="50%"}
+knitr::include_graphics(
+  path = "/Users/heathermcbrien/Documents/kaiser_wildfires/data_processing/rmd_data_checks/s7.pdf",
+  auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE),
+  dpi = NULL,
+  error = getOption("knitr.graphics.error", TRUE))
+knitr::include_graphics(
+  path = "/Users/heathermcbrien/Documents/kaiser_wildfires/data_processing/rmd_data_checks/s8.pdf",
+  auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE),
+  dpi = NULL,
+  error = getOption("knitr.graphics.error", TRUE))
+
+```
+
+
+
+```{r, out.width="50%"}
+knitr::include_graphics(
+  path = "/Users/heathermcbrien/Documents/kaiser_wildfires/data_processing/rmd_data_checks/s9.pdf",
+  auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE),
+  dpi = NULL,
+  error = getOption("knitr.graphics.error", TRUE))
+knitr::include_graphics(
+  path = "/Users/heathermcbrien/Documents/kaiser_wildfires/data_processing/rmd_data_checks/s10.pdf",
+  auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE),
+  dpi = NULL,
+  error = getOption("knitr.graphics.error", TRUE))
+
+```
+

@@ -1,0 +1,190 @@
+---
+title: Wildfire exposure and health care use among people who use durable medical
+  equipment in Southern California
+author:
+- Heather McBrien^[Columbia Mailman School of Public Health]
+- Sebastian Rowland^[Columbia Mailman School of Public Health]
+- Tarik Benmarhnia^[University of California San Diego]
+- Sara Tartof^[Kaiser Permanente Southern California]
+- Joan Casey^[Columbia Mailman School of Public Health, \texttt{jac2250@cumc.columbia.edu}]
+fontsize: 11pt
+output:
+  word_document: default
+  pdf_document:
+    number_sections: yes
+bibliography: bib_2_attempt.bib
+---
+
+\newpage
+
+### Abstract {-}
+
+**Background:**
+Climate change-induced wildfires cause trauma, stress, and injury in affected communities, while exposing 70% of the US population to smoke PM~2.5~ annually. Few studies examine wildfire smoke exposure in vulnerable populations, and none evaluate residence in evacuation zones.
+
+**Methods:**
+We identified 236,732 Kaiser Permanente Southern California members age 45 or older who used electricity-dependent durable medical equipment (DME). DME use is associated with respiratory illness and disability, indicating vulnerability to smoke exposure and difficulty evacuating disaster zones. Daily counts of outpatient, inpatient, and emergency healthcare visits by DME users from 2016-2020 were linked with daily estimates of wildfire generated PM~2.5~ by ZIP code, along with ZIPS evacuated during the 2018 Getty and Woolsey fires. We performed negative binomial regression using direct and lagged effects of wildfire PM~2.5~ and difference-in-differences analyses to evaluate the association between wildfire evacuation exposure and health care visit frequency, adjusting for confounders.
+
+**Results:**
+Woolsey fire evacuation exposure was associated with fewer outpatient and more inpatient visits (RR = 0.98, 95% CI: 0.78, 0.87, RR = 1.45, 95% CI: 1.01, 2.11), while Getty fire evacuation exposure was not associated with visit frequency. In contrast, increases in wildfire PM~2.5~ were associated with small and constant decreases in outpatient visits for six days after a change. 
+
+**Conclusions:**
+DME users, presumed vulnerable to wildfire smoke exposure, may have sheltered in place on smoky days or took other precautions. However, the Woolsey fire, 100 times larger than the Getty, may have produced health concerns in those directly affected when evacuation was necessary and sheltering in place impossible.
+
+\newpage
+
+
+# Introduction
+
+
+Wildfires are widespread, have increased in severity because of climate change, and will worsen in coming decades [@spracklen2009; @fried2004; @westerling2006; @abatzoglou2016]. The direct impacts of wildfire, such as evacuations, power outages, and destruction of infrastructure cause trauma, stress, financial strain, and physical injury in affected communities [@belleville2019; @mccaffrey2014]. Winds also move smoke plumes across continents, exposing major cities and 70% of the US population to wildfire smoke annually [@liu2016; @odell2021; @lassman2017].
+
+Among other components harmful to health, wildfire smoke contains fine particulate matter (PM~2.5~). Smoke PM~2.5~ is likely more harmful to health than PM from other sources [@wong2011; @aguilera2021] and simultaneously constitutes most extreme PM~2.5~ exposure in California, accounting for 71% of total fine particulate matter on days that exceed US Environmental Protection Agency standards [@liu2016]. Exposure has been associated with respiratory and cardiovascular disease exacerbations [@reid2019; @haikerwal2015; @yao2020], increases in health care and ED visits for respiratory and cardiovascular disease [@reid2019pm; @hutchinson2018vg], hospital admissions [@reid2016ws; @liu2017admit], and deaths from respiratory and cardiovascular disease [@kollanus2016; @doubleday2020; @liu2015wa].
+
+While the health consequences of wildfire smoke exposure are well examined in general populations (see citations above), few studies have examined smoke exposure in vulnerable populations [@liu2017admit; @davies2018; @rappold2017; @aguilera2021b], or focused on non-smoke exposures. Only descriptive research has documented the effects of stress, evacuation, property destruction, or injury due to disaster [@belleville2019; @mccaffrey2014]. We believe this second exposure pathway, operating primarily through stress and based on proximity to wildfire, produces significant health effects, especially in vulnerable populations. Here, we define a novel exposure measuring the effect of proximity to wildfire on health, and evaluate the effect of both wildfire smoke and proximity to wildfire on medical care usage in people who use durable medical equipment (DME). This population is particularly vulnerable to both smoke and local wildfire disasters.
+
+DME use is common among seniors, and is associated with respiratory illness and other disabilities. Around 60% of Californian DME renters ensured by Medicaid use either Bilevel Positive Airway Pressure (BiPAP) machines, enteral feeding machines, hospital beds, infusion pumps, oxygen equipment, suction pumps, ventilators, or wheelchairs [@casey2021]. Smoke exposure is particularly dangerous among seniors and exacerbates respiratory and cardiovascular disease [@mahsin2021; @reid2019; @haikerwal2015; @yao2020], and those with DME-related disabilities are also more vulnerable to stress, while less able to evacuate disaster zones because of limited mobility or need for electricity [@casey2021; @kivimaki2018].
+
+Here, we use Kaiser Permanente electronic health record data from seven Southern California counties to examine health care usage in this population during two major wildfire events, and during smoke exposure throughout the three-year study period. 
+
+# Methods
+
+## Study population and outcome data
+
+We used electronic health record data from Kaiser Permanente to measure the association between health care use by DME users and two separate exposures: proximity to wildfire and wildfire smoke. We identified individuals who were 45 or older as of October 29th, 2019, and had rented DME in the year before this date. This definition excluded most breast pump users, a healthy subgroup of DME users, leaving a sample vulnerable to wildfires and smoke as described above [@casey2021]. We obtained daily counts of health care visits by this population at the ZCTA level, in seven counties in Southern California from January 1st, 2016 to March 15th, 2020. Specifically, we obtained counts of outpatient visits, ED visits, and inpatient admissions, as well as ED visits made only for cardiovascular or respiratory problems, and inpatient admissions only for cardiovascular or respiratory problems. 236,732 patients lived in the study area, which covered most of San Bernardino, Orange, Los Angeles, Riverside, San Diego, Ventura, and Kern counties (see Figure 1). The area was divided into 582 ZCTAs, each containing 1 - 1773 patients. In 2018 and 2019 respectively, these seven counties experienced 10 and 13 wildfires which burned over 1000 acres [@calfire2018; @calfire2019]. 
+
+We obtained approval from the Columbia Institutional Review Board through an exemption.
+
+## Exposure Definition
+
+### Wildfire smoke
+
+We measured wildfire smoke exposure by estimating both wildfire and non-wildfire PM~2.5~ concentrations at the ZCTA level using a multistage approach allowing us to distinguish between wildfire and non-wildfire PM~2.5~ exposure. Briefly, we first identified smoke-plume exposed ZCTA codes/days with the National Oceanic and Atmospheric Administration's (NOAA) Hazard Mapping System (HMS) and overall PM~2.5~ concentration with USEPA monitoring data from the BLANK EDIT THIS stations and then used a spatiotemporal multiple imputation approach to estimate daily ZCTA-level wildfire and non-wildfire PM~2.5~ concentrations. See 'Tarik's paper' and TARIK CITATION. for a more detailed description of our estimation methods. 
+
+Again, daily health care visit counts by ZCTA were low and often zero. Since there have been associations between same-day air pollution and hospital visits up to a week later, we planned to test for a lagged effect, necessitating daily health care visit counts rather than weekly ones. However, we still needed to prevent zero-inflation in our analysis. We therefore created higher-level spatial groupings of several ZCTAs based on spatial proximity, using ZCTA codes (see appendix for detailed description of this procedure). We calculated a daily higher-level grouping wildfire PM~2.5~ measurement by averaging daily wildfire PM~2.5~ across grouped ZCTAs. 
+
+### Proximity to wildfire
+
+To measure proximity to wildfire, we obtained data on the fire boundaries and evacuation zones of two significant Southern California wildfires: the Getty fire and the Woolsey fire. The Getty fire is notable because it necessitated evacuations in the study area during its 9 day duration, in densely populated Los Angeles [@lapdgetty]. Similarly, the Woolsey fire required the evacuation of 295,000 people from Los Angeles and Ventura counties, also in the study area, and burned 1643 structures and almost 100,000 acres of land over 13 days, making it particularly destructive [@lapdgetty; @woolsey; @woolseydeaths]. Additionally, DME users in the sample rented equipment during these fires. 
+
+We identified ZCTAs proximal to either fire, marking them as exposed on days when they were within 20 km of the fire boundary, or within 10 km of the evacuation zone, and the fire was burning. We considered evacuated ZCTAs, those close to the evacuation zone, and those close to the fire all exposed, since both fire, evacuation, and anticipating potential fire or evacuation can cause stress. Figure 1 maps these areas, with data from ca.gov's GIS file archive (see the appendix for discussion of wildfire boundary and evacuation zone definition). Because the number of DME-using patients in each ZCTA ranged from 1 - 1773, and the number of daily health care visits by ZCTA was often low or zero. To avoid zero-inflation in our analysis, we aggregated daily visit counts to the weekly level, considering a ZCTA exposed if it was exposed any day in a week. This aggregation also removed weekend-weekday patterns in outpatient visits. 
+
+
+## Analysis
+
+We used negative binomial regression to evaluate the relationship between wildfire proximity and each type of health care visit (outpatient visits, inpatient visits, emergency visits, inpatient visits for cardiorespiratory concerns, and emergency visits for cardiorespiratory concerns). We tested each relationship separately for each fire, performing ten regression analyses in R [@citeR] using the mgcv package [@mgcv].
+
+In each model, we controlled for weekly mean temperature with a penalized spline term, as temperature can be a predictor of respiratory and cardiovascular health care utilization [@green2010] and wildfire [@vlassova2014], using daily temperature data averaged over ZCTAs from the PRISM Climate Group website [@PRISM]. We also controlled for weekly temporal trends using a penalized spline, and we included an offset to account for each ZCTA population. We did not control for wildfire smoke exposure, or PM~2.5~, as we considered this part of the exposure rather than a confounder. 
+
+We used negative binomial regression again to test the relationship between daily wildfire PM~2.5~ and each type of daily health care visit. We performed these analyses with the higher-level spatial groupings described above in the exposure definition section. We were interested in lagged effects of wildfire PM~2.5~ on health care visits, so we checked the autocorrelation of wildfire PM measurements to determine the appropriate modeling approach. We found wildfire PM~2.5~ was only weakly autocorrelated, (lags 1-7 days had <0.25 correlation with lag 0) unlike other sources of air pollution, as it increased dramatically on certain days but then would just as sharply decrease (see Figure 2 for wildfire PM~2.5~ levels throughout the study period). We attributed this variation to wind and weather. We therefore did not constrain our models, and instead included fixed effects for wildfire PM~2.5~ lags 0-7.
+
+We controlled for temperature with a natural spline, and controlled for temporal effects with a natural spline with 12 degrees of freedom, using the number of years of the study period (four) to determine the appropriate spline flexibility. We also controlled for non-wildfire pm with a natural spline, added an offset accounting for higher-level grouping population size, and added a fixed effect to the model of outpatient visits, accounting for fewer visits on weekend days.
+
+We intended to include a random effect to account for variation between spatial groupings, but we were unable to do so because of limited computational power. Instead, we included fixed effects for a comprehensive set of socioeconomic variables, obtaining values by ZCTA from the 5-year 2015-2019 ACS [@acs]. We included median income, home ownership (% homes occupied by owner), poverty (percent households below threshold income), age structure (percent of population under 5, 5-19, 20-64, and 65+), and racial structure (percent Hispanic, percent White, percent Black). We took a simple mean over each ZCTA in a higher-level grouping to obtain average values of these covariates when appropriate, or summed across ZCTAs when appropriate. See the appendix for model equations and a list of specific variables used, and see https://github.com/heathermcb/kaiser_wildfires for all analysis code. 
+
+
+# Results
+
+## Health data description
+
+During the 1561-day study period, there were an average of 8 outpatient visits per week per ZCTA. There were an average of 3 inpatient visits, 0.5 emergency visits, 0.2 inpatient visits for cardiorespiratory concerns, and 0.4 emergency visits for cardiorespiratory concerns per week per ZCTA. Of the 62,892 emergency visits made over the study period, most of them (49,364) were for cardiorespiratory concerns. Similarly, most of the inpatient admissions over the study period were for cardiorespiratory concerns (30,325 of 33,773). Therefore, the analyses conducted with emergency or inpatient visits may produce results similar to analyses of cardiorespiratory inpatient and emergency visits.
+
+## PM~2.5~ exposure 
+
+Mean daily wildfire PM~2.5~ concentration by geographical grouping throughout the study period was very low at 0.22 $\mu g/m^3$ (SD = 2.67) since most groupings on most days (85%) reported 0 wildfire PM~2.5~, while the maximum measurement was 551.53 $\mu g/m^3$. However, mean daily non-wildfire PM~2.5~ by grouping was 11.0 $\mu g/m^3$ (SD = 6.69), just under the yearly EPA mean exposure limit of 12 $\mu g/m^3$. Mean daily total PM~2.5~ by grouping over the study period was also 11.0 $\mu g/m^3$ (SD = 6.69).
+
+214 of the 274 geographical groupings experienced daily mean total PM~2.5~ concentrations greater that the EPA daily limit of 35 $\mu g/m^3$ at some point. There were 156 days of the 1561 studied where at least one grouping experienced above-limit PM~2.5~. Non-wildfire PM~2.5~ measurements, which were calculated by taking total PM~2.5~ and subtracting estimates of wildfire PM~2.5~, followed a similar pattern - there were 156 days where at least one grouping was over the limit, and 214 groupings experienced above-limit levels.
+
+In contrast, only 42 groupings experienced above-limit wildfire PM, on 21 days. Though wildfire PM contributed to above-limit mean PM measurements, the majority of above-limit levels were attributable to non-wildfire PM. On days exceeding EPA limits, wildfire PM~2.5~ made up 12% of total PM~2.5~ present.
+
+Increases in wildfire PM~2.5~ were associated with slight decreases in outpatient visits lasting 6 days, with rate ratios ranging from 0.98 to 0.99 (see Table 1 for all RRs and CIs). The effects were almost constant over the period of 6 days. The frequency of inpatient visits, inpatient visits for cardiorespiratory concerns, emergency visits, and emergency visits for cardiorespiratory concerns did not change with changes in wildfire PM~2.5~. Increases in wildfire PM~2.5~ resulted in a very small decrease in all inpatient admissions lagged by 3 days (RR = 0.98, 95% CI: 0.97, 0.99), however, lags 0-2 and 4-6 were not significant, and showed no sub-significant pattern of increase or decrease towards lag 3. Similarly, ER visits decreased slightly in frequency six days after increases in wildfire PM~2.5~ (RR = 0.99, 95% CI: 0.98, 0.99), while all other lags were insignificant.  
+
+## Proximity to wildfire 
+
+There were 98 ZCTAs exposed to the Getty fire, or within 20 km of the Getty fire boundary, in an evacuated area, or within 10 km of an evacuated area. Despite the comparatively large size of the Woolsey fire, only 54 ZCTAs were exposed, since the area burned was more rural. 33 ZCTAs were exposed to both fires. The average temperature in ZCTAs near the Getty fire was 20 degrees Celsius, while the mean temperature in the rest of the study area over the same time period was 19 degrees Celsius. During the Woolsey fire, exposed ZCTAs experienced an average temperature of 17 degrees Celsius, while unexposed ZCTAs averaged 16 degrees Celsius. 
+
+### Getty fire exposure
+
+Throughout the study period, (not specifically during the fire), outpatient visits in ZCTAS that were exposed  were more frequent than in never-exposed ZCTAs (RR = 1.05, 95% CI: 1.03, 1.06), and emergency visits and emergency visits for cardiorespiratory concerns also more frequent (RR = 1.10, 95% CI: 1.07, 1.14 and RR = 1.18, 95% CI: 1.14, 1.22 respectively). The frequency of other visits did not differ between exposed ZCTAs and non-exposed ZCTAs. During the fire, outpatient visits, emergency visits, and emergency visits for cardiorespiratory problems increased in the whole study area (RR = 1.12, 95% CI: 1.07, 1.17, RR = 1.23, 95% CI: 1.10, 1.38, RR = 1.22, 95% CI: 1.08, 1.39 respectively), but there was no additional increase in ZCTAs exposed to the fire. There was no significant relationship between inpatient visits or inpatient visits for cardiorespiratory concerns exposure to Getty fire, either for ZCTAs close to the fire or those not in proximity.
+
+### Woolsey fire exposure
+
+Similarly, all types of healthcare visits were more frequent in the ZCTAs exposed to the Woolsey fire overall (not during fire exposure) (RR = 1.15, 95% CI: 1.14, 1.17, RR = 1.10, 95% CI: 1.04, 1.17, RR = 1.13, 95% CI: 1.09, 1.18, RR = 1.12, 95% CI: 1.06, 1.19, RR = 1.17, 95% CI: 1.12, 1.22). During the Woolsey fire, the frequency of all types of visits increased in the whole study area, except outpatient visits, which remained the same (inpatient visits RR = 1.22, CI: 1.08, 1.39, emergency visits RR = 1.15,  CI: 1.04, 1.27, inpatient cardiorespiratory visits RR = 1.19, CI: 1.04, 1.35, emergency cardiorespiratory visits RR = 1.17, CI: 1.06, 1.30). There were no additional changes in inpatient visits or emergency visits for all or cardiorespiratory concerns in ZCTAs exposed to the fire. However, in the exposed area, outpatient visits decreased significantly, while inpatient admissions for cardiorespiratory concerns increased (RR = 0.98, CI: 0.78, 0.87, RR = 1.45, CI: 1.01, 2.11).
+
+
+
+
+# Discussion 
+
+In summary, Woolsey fire exposure was associated with fewer outpatient visits, and more inpatient admissions for cardiorespiratory concerns. However, we found no association between Getty fire exposure and any kind of health care visit. Increases in wildfire PM~2.5~ were associated with small decreases in outpatient visits for six days after a change, and we found no associations between PM and other kinds of health care visits. 
+
+Previous literature has repeatedly demonstrated associations between higher wildfire PM~2.5~ concentrations and more frequent emergency visits, hospital admissions, and outpatient visits - outcomes identical to those we examined here. In particular, Hutchinson et al. examined outpatient care use during 2007 San Diego fires, and found PM~2.5~ was associated with increases lasting five days in Medicaid outpatient visits. Similarly, Sheldon et al. examined outpatient visits in a Singaporean sample during Indonesian wildfires, and again found increases in frequency. However, we found no such associations, and instead observed an opposite effect, despite the vulnerability of DME users to wildfire and the higher rates of cardiorespiratory disease, lower mobility, and need for electricity to power DME in the population.
+
+It could be that DME users are more prepared for wildfire smoke than other populations. However, Casey et al. found that DME users were *less* prepared for power outages than other groups, making above-average smoke preparedness by DME users less plausible. Even so, it is possible that DME users are sheltering in place on smoky days, perhaps of their vulnerability. Patients may be choosing to stay home rather than make an outpatient visit, while reducing other activities, which may in turn protect them from the effects of smoke PM~2.5~. 
+
+Limitations could also explain these results. First, we only counted visits by Kaiser-insured DME users made to Kaiser clinics and hospitals. These patients would be highly motivated to seek care at Kaiser, given their insurance status, however it is possible that they sought urgent care for PM~2.5-related needs at other clinics. This could produce artificially reduced visit counts during smoke exposure.
+
+Second, the smoke PM~2.5~ measurements made here are based on images of wildfire smoke plumes, meaning that non-wildfire PM from non-wildfire smoke is correctly classified as non-wildfire PM in the data. However, this smoke may have a profound effect on health and health care use. For example, the highest daily ZCTA PM~2.5~ measurement in the study period was recorded in Kern county, and was the result of an agricultural burn (see Figure 3 of non-wildfire PM~2.5~ – the tallest line in the figure shows mean PM levels on this day). Exposure to this smoke PM, but not wildfire PM, likely mimicked wildfire smoke exposure, and measurements like these could weaken the statistical relationship between wildfire PM~2.5~ and health care use observed in this study.
+
+
+The association between proximity to wildfire and health care use observed here is more easily explained. During the Woolsey fire, outpatient visits were less frequent, while inpatient admissions increased. If hospitals and clinics close to the fire closed during the emergency, and patients were forced to evacuate, outpatient visits would slow. Simultaneously, evacuation could precipitate inpatient admissions at other, open hospitals. 
+
+Because the Woolsey fire burned 100,000 acres of land, while the Getty fire burned 800, null associations between Getty exposure and all visit types could be due to the magnitude of the exposure, as the Getty fire might not have been large enough to produce significant results. A larger analysis examining several wildfires, rather than two, could shed light on this issue. These analyses are also limited by patients seeking care at other, non-Kaiser, clinics or hospitals. 
+
+Both during smoky days with high wildfire PM~2.5~, and during fire evacuations, DME users may not be getting adequate medical care. Outpatient visits comprise the majority of care delivered in the United States, and decreased frequency of visits during wildfires could represent interruptions in vital care.
+
+As wildfires become more frequent and severe with climate change, it is critical we understand how they affect both local populations and those exposed to smoke. Protecting vulnerable populations that may be harmed by exposures which others can avoid or endure, without as many lasting effects, is essential. More work is needed to understand how DME using patients are responding to wildfires, and how we can best support those affected by smoke, fire, or evacuation. 
+
+
+# Appendix 
+
+## Notes on wildfire evacuation zones, boundaries, and exposure definition
+
+We obtained shapefiles of the Woolsey and Getty fire boundaries from https://frap.fire.ca.gov/mapping/gis-data/. These files describe boundaries around all areas burned by the fires. In reality, the fire boundaries were smaller at the beginning of the fires, and expanded as they burned. We used these static boundaries to identify exposed ZCTAs.
+
+The Woolsey fire, in particular, burned for 13 days. Therefore, ZCTAs that were close to the fire boundary and defined as 'exposed' in our study may not have been proximal to the fire at first, and may not have been truly exposed until later. Unfortunately, dynamic fire boundary data isn't available. 
+
+Just as the fire boundaries changed, evacuation zones also changed throughout each fire. Additionally, machine-readable data on evacuation zones for either fire was not available, though there were several maps available of evacuation zones at different points during each fire. We reviewed the following webpages containing maps of the evacuation zones, and traced what we believed to be an accurate boundary around all areas evacuated in each fire in QGIS [@qgissoftware]. The evacuation zone boundaries we defined are plotted in Figure 1, along with the fire boundaries. As always, our code is available at https://github.com/heathermcb/kaiser_wildfires.
+
++-----------------------------------------------------------------------------+
+|Getty fire:|
++=============================================================================+
+|1. https://www.newsweek.com/getty-fire-evacuation-map-update-california-los-angeles-1468222|
++-----------------------------------------------------------------------------+
+|2. https://www.newsweek.com/getty-center-fire-map-evacuation-los-angeles-california-1468100|
++-----------------------------------------------------------------------------+
+|3. https://www.express.co.uk/news/world/1196943/getty-fire-evacuation-map-405-fire-update-los-angeles-fire-evacuation-road-school-closures|
++-----------------------------------------------------------------------------+
+|4. https://www.flyertalk.com/forum/los-angeles/1993097-getty-fire-405-closed-sepulveda-pass-now-open.html|
++-----------------------------------------------------------------------------+
+|5. https://heavy.com/news/2019/10/getty-fire-los-angeles/|
++-----------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------+
+|Woolsey fire:|
++=============================================================================+
+|1. https://www.kclu.org/local-news/2018-11-10/map-shows-boundaries-of-woolsey-hill-brush-fires-and-evacuation-areas|
++-----------------------------------------------------------------------------+
+|2. https://wildfiretoday.com/tag/woolsey-fire/|
++-----------------------------------------------------------------------------+
+|3. https://www.dailynews.com/2018/11/08/this-map-shows-where-the-hill-fire-and-woolsey-fire-are-burning/|
++-----------------------------------------------------------------------------+
+|4. https://www.mercurynews.com/2018/11/09/map-of-woolsey-and-hill-fires-highway-101-closed-malibu-evacuated/|
++-----------------------------------------------------------------------------+
+|5. https://woolseylawyers.com/woolsey-fire-map/|
++-----------------------------------------------------------------------------+
+
+
+
+## Higher-level groupings of ZCTAs 
+
+We created higher-level groupings of ZCTAs using the numerical ZCTA codes. We used a bespoke method, and then tested the resulting spatial groupings to make sure that ZCTAs grouped together had similar exposure measurements, to guard against exposure misclassification. We grouped ZCTAs together if all their numerical codes differed by 1 in sequence. For example, codes 90001-90008 and 90011-90014 were in the study area. We grouped codes 90001 - 90008 together, as they are all sequentially 1 digit apart, while 90011-90014 formed a second grouping. This method resulted in groupings of ZCTAs that were all adjacent, since similar codes tend to be geographically close.
+
+Using this method, we created 274 groups containing 1-19 ZCTAs each, with a mean and mode group size of 2. We assessed the correlation between wildfire PM~2.5~ within each group and between all ZCTAs regardless of group, concluding that wildfire PM~2.5~ measurements within groups were highly correlated (mean within-group correlation was r = 0.96), while mean correlation of PM~2.5~ between any two ZCTAs was 0.48. We also mapped the groups to confirm that all ZCTAs grouped together were adjacent. The code that creates these groupings and assesses them is available at https://github.com/heathermcb/kaiser_wildfires. 
+
+
+\newpage
+# References
+
+

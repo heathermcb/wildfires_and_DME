@@ -1,0 +1,884 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Results tables},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Results tables}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\hypertarget{weekly-lags}{%
+\section{Weekly lags}\label{weekly-lags}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# function to calculate a RR and confidence interval from one of our}
+\CommentTok{\# neg bin gams, and output them in 3 length 3 vectors: RR, lw, up.}
+\NormalTok{week\_RR\_vectors }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(weekly\_model) \{}
+\NormalTok{  RR\_week1 }\OtherTok{\textless{}{-}} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%04.2f"}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(weekly\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{2}\NormalTok{]]) }\SpecialCharTok{\^{}} \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{))}
+\NormalTok{  RR\_week2 }\OtherTok{\textless{}{-}} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%04.2f"}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(weekly\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{3}\NormalTok{]]) }\SpecialCharTok{\^{}} \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{))}
+\NormalTok{  RR\_week3 }\OtherTok{\textless{}{-}} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%04.2f"}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(weekly\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{4}\NormalTok{]]) }\SpecialCharTok{\^{}} \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{))}
+\NormalTok{  lw\_week1 }\OtherTok{\textless{}{-}}
+    \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%04.2f"}\NormalTok{,}\FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(weekly\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{2}\NormalTok{]] }\SpecialCharTok{{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(weekly\_model)[}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{))}
+\NormalTok{  up\_week1 }\OtherTok{\textless{}{-}}
+    \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%04.2f"}\NormalTok{,}\FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(weekly\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{2}\NormalTok{]] }\SpecialCharTok{+} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(weekly\_model)[}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{))}
+\NormalTok{  lw\_week2 }\OtherTok{\textless{}{-}}
+    \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%04.2f"}\NormalTok{,}\FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(weekly\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{3}\NormalTok{]] }\SpecialCharTok{{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(weekly\_model)[}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{))}
+\NormalTok{  up\_week2 }\OtherTok{\textless{}{-}}
+    \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%04.2f"}\NormalTok{,}\FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(weekly\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{3}\NormalTok{]] }\SpecialCharTok{+} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(weekly\_model)[}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{))}
+\NormalTok{  lw\_week3 }\OtherTok{\textless{}{-}}
+    \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%04.2f"}\NormalTok{,}\FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(weekly\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{4}\NormalTok{]] }\SpecialCharTok{{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(weekly\_model)[}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{))}
+\NormalTok{  up\_week3 }\OtherTok{\textless{}{-}}
+    \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%04.2f"}\NormalTok{,}\FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(weekly\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{4}\NormalTok{]] }\SpecialCharTok{+} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(weekly\_model)[}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{))}
+\NormalTok{  lag\_week\_1 }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(RR\_week1, }\StringTok{\textquotesingle{} [\textquotesingle{}}\NormalTok{, lw\_week1, }\StringTok{\textquotesingle{}, \textquotesingle{}}\NormalTok{, up\_week1, }\StringTok{\textquotesingle{}]\textquotesingle{}}\NormalTok{)}
+\NormalTok{  lag\_week\_2 }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(RR\_week2, }\StringTok{\textquotesingle{} [\textquotesingle{}}\NormalTok{, lw\_week2, }\StringTok{\textquotesingle{}, \textquotesingle{}}\NormalTok{, up\_week2, }\StringTok{\textquotesingle{}]\textquotesingle{}}\NormalTok{)}
+\NormalTok{  lag\_week\_3 }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(RR\_week3, }\StringTok{\textquotesingle{} [\textquotesingle{}}\NormalTok{, lw\_week3, }\StringTok{\textquotesingle{}, \textquotesingle{}}\NormalTok{, up\_week3, }\StringTok{\textquotesingle{}]\textquotesingle{}}\NormalTok{)}
+\NormalTok{  all }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(lag\_week\_1, lag\_week\_2, lag\_week\_3)}
+  \FunctionTok{return}\NormalTok{(all)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# identify main 3 week lag models}
+\NormalTok{week\_penalized\_spline\_outpatient }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{18}\NormalTok{]]}
+\NormalTok{week\_penalized\_spline\_inpatient }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{10}\NormalTok{]]}
+\NormalTok{week\_penalized\_spline\_ED }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{2}\NormalTok{]]}
+\NormalTok{week\_penalized\_spline\_inpatient\_cardioresp }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{12}\NormalTok{]]}
+\NormalTok{week\_penalized\_spline\_ED\_cardioresp }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{4}\NormalTok{]]}
+
+\CommentTok{\# make table of results}
+\NormalTok{s1 }\OtherTok{\textless{}{-}} \FunctionTok{week\_RR\_vectors}\NormalTok{(week\_penalized\_spline\_outpatient)}
+\NormalTok{s2 }\OtherTok{\textless{}{-}} \FunctionTok{week\_RR\_vectors}\NormalTok{(week\_penalized\_spline\_inpatient)}
+\NormalTok{s3 }\OtherTok{\textless{}{-}} \FunctionTok{week\_RR\_vectors}\NormalTok{(week\_penalized\_spline\_ED)}
+\NormalTok{s4 }\OtherTok{\textless{}{-}} \FunctionTok{week\_RR\_vectors}\NormalTok{(week\_penalized\_spline\_inpatient\_cardioresp)}
+\NormalTok{s5 }\OtherTok{\textless{}{-}} \FunctionTok{week\_RR\_vectors}\NormalTok{(week\_penalized\_spline\_ED\_cardioresp)}
+
+\NormalTok{weekly\_lags\_penalized\_spline }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(s1, s2, s3, s4, s5)}
+\FunctionTok{colnames}\NormalTok{(weekly\_lags\_penalized\_spline) }\OtherTok{\textless{}{-}}
+  \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}lag 0 weeks\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lag 1 week\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lag 2 weeks\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(weekly\_lags\_penalized\_spline)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule()
+& lag 0 weeks & lag 1 week & lag 2 weeks \\
+\midrule()
+\endhead
+s1 & 1.10 {[}1.04, 1.17{]} & 1.04 {[}1.00, 1.09{]} & 1.05 {[}1.02,
+1.09{]} \\
+s2 & 1.01 {[}0.84, 1.20{]} & 1.08 {[}0.94, 1.23{]} & 0.99 {[}0.85,
+1.15{]} \\
+s3 & 1.03 {[}0.90, 1.19{]} & 0.99 {[}0.88, 1.11{]} & 1.02 {[}0.92,
+1.14{]} \\
+s4 & 0.94 {[}0.78, 1.12{]} & 1.10 {[}0.96, 1.27{]} & 0.98 {[}0.85,
+1.15{]} \\
+s5 & 1.07 {[}0.92, 1.26{]} & 0.96 {[}0.84, 1.10{]} & 1.02 {[}0.91,
+1.15{]} \\
+\bottomrule()
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# sensitivity analysis week lag models}
+\NormalTok{week\_ns\_outpatient }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{17}\NormalTok{]]}
+\NormalTok{week\_ns\_inpatient }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{9}\NormalTok{]]}
+\NormalTok{week\_ns\_ED }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{1}\NormalTok{]]}
+\NormalTok{week\_ns\_inpatient\_cardioresp }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{11}\NormalTok{]]}
+\NormalTok{week\_ns\_ED\_cardioresp }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{3}\NormalTok{]]}
+
+\NormalTok{t1 }\OtherTok{\textless{}{-}} \FunctionTok{week\_RR\_vectors}\NormalTok{(week\_ns\_outpatient)}
+\NormalTok{t2 }\OtherTok{\textless{}{-}} \FunctionTok{week\_RR\_vectors}\NormalTok{(week\_ns\_inpatient)}
+\NormalTok{t3 }\OtherTok{\textless{}{-}} \FunctionTok{week\_RR\_vectors}\NormalTok{(week\_ns\_ED)}
+\NormalTok{t4 }\OtherTok{\textless{}{-}} \FunctionTok{week\_RR\_vectors}\NormalTok{(week\_ns\_inpatient\_cardioresp)}
+\NormalTok{t5 }\OtherTok{\textless{}{-}} \FunctionTok{week\_RR\_vectors}\NormalTok{(week\_ns\_ED\_cardioresp)}
+
+\NormalTok{weekly\_lags\_natural\_spline }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(t1, t2, t3, t4, t5)}
+\FunctionTok{colnames}\NormalTok{(weekly\_lags\_natural\_spline) }\OtherTok{\textless{}{-}}
+  \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}lag 0 weeks\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lag 1 week\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lag 2 weeks\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(weekly\_lags\_natural\_spline)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule()
+& lag 0 weeks & lag 1 week & lag 2 weeks \\
+\midrule()
+\endhead
+t1 & 1.21 {[}1.15, 1.27{]} & 1.01 {[}0.97, 1.05{]} & 1.06 {[}1.02,
+1.10{]} \\
+t2 & 0.98 {[}0.83, 1.17{]} & 1.09 {[}0.95, 1.24{]} & 0.99 {[}0.85,
+1.15{]} \\
+t3 & 1.04 {[}0.91, 1.18{]} & 0.99 {[}0.89, 1.11{]} & 1.02 {[}0.91,
+1.13{]} \\
+t4 & 0.91 {[}0.76, 1.10{]} & 1.11 {[}0.97, 1.28{]} & 0.99 {[}0.85,
+1.15{]} \\
+t5 & 1.10 {[}0.95, 1.26{]} & 0.95 {[}0.84, 1.09{]} & 1.02 {[}0.90,
+1.15{]} \\
+\bottomrule()
+\end{longtable}
+
+\hypertarget{daily-lags}{%
+\section{Daily lags}\label{daily-lags}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# function to calculate a RR and confidence interval from one of our}
+\CommentTok{\# neg bin gams, and output them in 3 length 3 vectors: RR, lw, up.}
+\NormalTok{day\_RR\_vectors }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(daily\_model) \{}
+\NormalTok{  RR\_day1 }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{2}\NormalTok{]]) }\SpecialCharTok{\^{}} \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  RR\_day2 }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{3}\NormalTok{]]) }\SpecialCharTok{\^{}} \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  RR\_day3 }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{4}\NormalTok{]]) }\SpecialCharTok{\^{}} \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  RR\_day4 }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{5}\NormalTok{]]) }\SpecialCharTok{\^{}} \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  RR\_day5 }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{6}\NormalTok{]]) }\SpecialCharTok{\^{}} \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  RR\_day6 }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{7}\NormalTok{]]) }\SpecialCharTok{\^{}} \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  RR\_day7 }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{8}\NormalTok{]]) }\SpecialCharTok{\^{}} \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  lw\_day1 }\OtherTok{\textless{}{-}}
+    \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{2}\NormalTok{]] }\SpecialCharTok{{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(daily\_model)[}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  up\_day1 }\OtherTok{\textless{}{-}}
+    \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{2}\NormalTok{]] }\SpecialCharTok{+} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(daily\_model)[}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  lw\_day2 }\OtherTok{\textless{}{-}}
+    \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{3}\NormalTok{]] }\SpecialCharTok{{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(daily\_model)[}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  up\_day2 }\OtherTok{\textless{}{-}}
+    \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{3}\NormalTok{]] }\SpecialCharTok{+} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(daily\_model)[}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  lw\_day3 }\OtherTok{\textless{}{-}}
+    \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{4}\NormalTok{]] }\SpecialCharTok{{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(daily\_model)[}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  up\_day3 }\OtherTok{\textless{}{-}}
+    \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{4}\NormalTok{]] }\SpecialCharTok{+} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(daily\_model)[}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  lw\_day4 }\OtherTok{\textless{}{-}}
+    \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{5}\NormalTok{]] }\SpecialCharTok{{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(daily\_model)[}\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  up\_day4 }\OtherTok{\textless{}{-}}
+    \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{5}\NormalTok{]] }\SpecialCharTok{+} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(daily\_model)[}\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  lw\_day5 }\OtherTok{\textless{}{-}}
+    \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{6}\NormalTok{]] }\SpecialCharTok{{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(daily\_model)[}\DecValTok{6}\NormalTok{, }\DecValTok{6}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  up\_day5 }\OtherTok{\textless{}{-}}
+    \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{6}\NormalTok{]] }\SpecialCharTok{+} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(daily\_model)[}\DecValTok{6}\NormalTok{, }\DecValTok{6}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  lw\_day6 }\OtherTok{\textless{}{-}}
+    \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{7}\NormalTok{]] }\SpecialCharTok{{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(daily\_model)[}\DecValTok{7}\NormalTok{, }\DecValTok{7}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  up\_day6 }\OtherTok{\textless{}{-}}
+    \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{7}\NormalTok{]] }\SpecialCharTok{+} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(daily\_model)[}\DecValTok{7}\NormalTok{, }\DecValTok{7}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  lw\_day7 }\OtherTok{\textless{}{-}}
+    \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{8}\NormalTok{]] }\SpecialCharTok{{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(daily\_model)[}\DecValTok{8}\NormalTok{, }\DecValTok{8}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  up\_day7 }\OtherTok{\textless{}{-}}
+    \FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(daily\_model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{8}\NormalTok{]] }\SpecialCharTok{+} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(daily\_model)[}\DecValTok{8}\NormalTok{, }\DecValTok{8}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{) }\SpecialCharTok{\^{}}
+    \DecValTok{10}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+  
+\NormalTok{  lag\_day\_1 }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(RR\_day1, }\StringTok{\textquotesingle{} [\textquotesingle{}}\NormalTok{, lw\_day1, }\StringTok{\textquotesingle{}, \textquotesingle{}}\NormalTok{, up\_day1, }\StringTok{\textquotesingle{}]\textquotesingle{}}\NormalTok{)}
+\NormalTok{  lag\_day\_2 }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(RR\_day2, }\StringTok{\textquotesingle{} [\textquotesingle{}}\NormalTok{, lw\_day2, }\StringTok{\textquotesingle{}, \textquotesingle{}}\NormalTok{, up\_day2, }\StringTok{\textquotesingle{}]\textquotesingle{}}\NormalTok{)}
+\NormalTok{  lag\_day\_3 }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(RR\_day3, }\StringTok{\textquotesingle{} [\textquotesingle{}}\NormalTok{, lw\_day3, }\StringTok{\textquotesingle{}, \textquotesingle{}}\NormalTok{, up\_day3, }\StringTok{\textquotesingle{}]\textquotesingle{}}\NormalTok{)}
+\NormalTok{  lag\_day\_4 }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(RR\_day4, }\StringTok{\textquotesingle{} [\textquotesingle{}}\NormalTok{, lw\_day4, }\StringTok{\textquotesingle{}, \textquotesingle{}}\NormalTok{, up\_day4, }\StringTok{\textquotesingle{}]\textquotesingle{}}\NormalTok{)}
+\NormalTok{  lag\_day\_5 }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(RR\_day5, }\StringTok{\textquotesingle{} [\textquotesingle{}}\NormalTok{, lw\_day5, }\StringTok{\textquotesingle{}, \textquotesingle{}}\NormalTok{, up\_day5, }\StringTok{\textquotesingle{}]\textquotesingle{}}\NormalTok{)}
+\NormalTok{  lag\_day\_6 }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(RR\_day6, }\StringTok{\textquotesingle{} [\textquotesingle{}}\NormalTok{, lw\_day6, }\StringTok{\textquotesingle{}, \textquotesingle{}}\NormalTok{, up\_day6, }\StringTok{\textquotesingle{}]\textquotesingle{}}\NormalTok{)}
+\NormalTok{  lag\_day\_7 }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(RR\_day7, }\StringTok{\textquotesingle{} [\textquotesingle{}}\NormalTok{, lw\_day7, }\StringTok{\textquotesingle{}, \textquotesingle{}}\NormalTok{, up\_day7, }\StringTok{\textquotesingle{}]\textquotesingle{}}\NormalTok{)}
+\NormalTok{  all }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(lag\_day\_1, lag\_day\_2, lag\_day\_3, lag\_day\_4, lag\_day\_5, }
+\NormalTok{           lag\_day\_6, lag\_day\_7)}
+  \FunctionTok{return}\NormalTok{(all)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# identify main daily lag models}
+\NormalTok{penalized\_spline\_outpatient }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{20}\NormalTok{]]}
+\NormalTok{penalized\_spline\_inpatient }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{16}\NormalTok{]]}
+\NormalTok{penalized\_spline\_ED }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{8}\NormalTok{]]}
+\NormalTok{penalized\_spline\_inpatient\_cardioresp }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{14}\NormalTok{]]}
+\NormalTok{penalized\_spline\_ED\_cardioresp }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{6}\NormalTok{]]}
+
+\CommentTok{\# make table of results}
+\NormalTok{s1 }\OtherTok{\textless{}{-}} \FunctionTok{day\_RR\_vectors}\NormalTok{(penalized\_spline\_outpatient)}
+\NormalTok{s2 }\OtherTok{\textless{}{-}} \FunctionTok{day\_RR\_vectors}\NormalTok{(penalized\_spline\_inpatient)}
+\NormalTok{s3 }\OtherTok{\textless{}{-}} \FunctionTok{day\_RR\_vectors}\NormalTok{(penalized\_spline\_ED)}
+\NormalTok{s4 }\OtherTok{\textless{}{-}} \FunctionTok{day\_RR\_vectors}\NormalTok{(penalized\_spline\_inpatient\_cardioresp)}
+\NormalTok{s5 }\OtherTok{\textless{}{-}} \FunctionTok{day\_RR\_vectors}\NormalTok{(penalized\_spline\_ED\_cardioresp)}
+
+\NormalTok{daily\_lags\_penalized\_spline }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(s1, s2, s3, s4, s5)}
+\FunctionTok{colnames}\NormalTok{(daily\_lags\_penalized\_spline) }\OtherTok{\textless{}{-}}
+  \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}lag 0 days\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lag 1 day\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lag 2 days\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lag 3 days\textquotesingle{}}\NormalTok{,}
+    \StringTok{\textquotesingle{}lag 4 days\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lag 5 days\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lag 6 days\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(daily\_lags\_penalized\_spline)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0233}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1395}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1395}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1395}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1395}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1395}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1395}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1395}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+lag 0 days
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+lag 1 day
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+lag 2 days
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+lag 3 days
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+lag 4 days
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+lag 5 days
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+lag 6 days
+\end{minipage} \\
+\midrule()
+\endhead
+s1 & 0.98 {[}0.96, 1.01{]} & 0.96 {[}0.94, 0.99{]} & 1.03 {[}1, 1.06{]}
+& 1.08 {[}1.05, 1.11{]} & 0.98 {[}0.95, 1.02{]} & 1.07 {[}1.04, 1.1{]} &
+1.12 {[}1.09, 1.16{]} \\
+s2 & 0.94 {[}0.84, 1.04{]} & 1.01 {[}0.93, 1.1{]} & 0.95 {[}0.84,
+1.08{]} & 0.87 {[}0.76, 1{]} & 0.98 {[}0.87, 1.12{]} & 0.93 {[}0.81,
+1.06{]} & 1.02 {[}0.89, 1.16{]} \\
+s3 & 0.97 {[}0.91, 1.04{]} & 1.02 {[}0.96, 1.08{]} & 0.98 {[}0.89,
+1.07{]} & 0.96 {[}0.88, 1.06{]} & 0.95 {[}0.86, 1.04{]} & 1.03 {[}0.93,
+1.13{]} & 0.92 {[}0.82, 1.02{]} \\
+s4 & 0.91 {[}0.81, 1.02{]} & 1.03 {[}0.95, 1.12{]} & 0.93 {[}0.82,
+1.07{]} & 0.91 {[}0.79, 1.05{]} & 0.97 {[}0.85, 1.1{]} & 0.91 {[}0.79,
+1.05{]} & 0.99 {[}0.86, 1.14{]} \\
+s5 & 0.99 {[}0.92, 1.07{]} & 0.99 {[}0.91, 1.08{]} & 0.96 {[}0.87,
+1.07{]} & 0.99 {[}0.89, 1.1{]} & 0.92 {[}0.83, 1.03{]} & 1.01 {[}0.91,
+1.13{]} & 0.89 {[}0.79, 1.01{]} \\
+\bottomrule()
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# sensitivity analysis day lag models}
+\NormalTok{ns\_outpatient }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{19}\NormalTok{]]}
+\NormalTok{ns\_inpatient }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{15}\NormalTok{]]}
+\NormalTok{ns\_ED }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{7}\NormalTok{]]}
+\NormalTok{ns\_inpatient\_cardioresp }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{13}\NormalTok{]]}
+\NormalTok{ns\_ED\_cardioresp }\OtherTok{\textless{}{-}}\NormalTok{ all\_pm\_models[[}\DecValTok{5}\NormalTok{]]}
+
+\NormalTok{t1 }\OtherTok{\textless{}{-}} \FunctionTok{day\_RR\_vectors}\NormalTok{(ns\_outpatient)}
+\NormalTok{t2 }\OtherTok{\textless{}{-}} \FunctionTok{day\_RR\_vectors}\NormalTok{(ns\_inpatient)}
+\NormalTok{t3 }\OtherTok{\textless{}{-}} \FunctionTok{day\_RR\_vectors}\NormalTok{(ns\_ED)}
+\NormalTok{t4 }\OtherTok{\textless{}{-}} \FunctionTok{day\_RR\_vectors}\NormalTok{(ns\_inpatient\_cardioresp)}
+\NormalTok{t5 }\OtherTok{\textless{}{-}} \FunctionTok{day\_RR\_vectors}\NormalTok{(ns\_ED\_cardioresp)}
+
+\NormalTok{daily\_lags\_natural\_spline }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(t1, t2, t3, t4, t5)}
+\FunctionTok{colnames}\NormalTok{(daily\_lags\_natural\_spline) }\OtherTok{\textless{}{-}}
+  \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}lag 0 days\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lag 1 day\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lag 2 days\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lag 3 days\textquotesingle{}}\NormalTok{,}
+    \StringTok{\textquotesingle{}lag 4 days\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lag 5 days\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lag 6 days\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(daily\_lags\_natural\_spline)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0233}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1395}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1395}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1395}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1395}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1395}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1395}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1395}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+lag 0 days
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+lag 1 day
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+lag 2 days
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+lag 3 days
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+lag 4 days
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+lag 5 days
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+lag 6 days
+\end{minipage} \\
+\midrule()
+\endhead
+t1 & 0.99 {[}0.97, 1.02{]} & 0.97 {[}0.95, 1{]} & 1.04 {[}1.01, 1.07{]}
+& 1.09 {[}1.06, 1.12{]} & 0.99 {[}0.96, 1.03{]} & 1.07 {[}1.04, 1.1{]} &
+1.12 {[}1.09, 1.15{]} \\
+t2 & 0.94 {[}0.84, 1.04{]} & 1.02 {[}0.94, 1.1{]} & 0.96 {[}0.86,
+1.08{]} & 0.89 {[}0.79, 1.01{]} & 0.98 {[}0.89, 1.08{]} & 0.95 {[}0.85,
+1.07{]} & 1 {[}0.91, 1.1{]} \\
+t3 & 0.97 {[}0.91, 1.04{]} & 1.02 {[}0.97, 1.08{]} & 0.99 {[}0.91,
+1.07{]} & 0.97 {[}0.89, 1.06{]} & 0.96 {[}0.88, 1.05{]} & 1.02 {[}0.94,
+1.11{]} & 0.93 {[}0.85, 1.03{]} \\
+t4 & 0.91 {[}0.81, 1.02{]} & 1.03 {[}0.95, 1.11{]} & 0.95 {[}0.84,
+1.07{]} & 0.93 {[}0.82, 1.04{]} & 0.97 {[}0.87, 1.08{]} & 0.93 {[}0.81,
+1.05{]} & 0.98 {[}0.88, 1.09{]} \\
+t5 & 0.99 {[}0.92, 1.07{]} & 0.99 {[}0.91, 1.08{]} & 0.97 {[}0.88,
+1.07{]} & 1 {[}0.91, 1.1{]} & 0.93 {[}0.84, 1.04{]} & 1.02 {[}0.92,
+1.12{]} & 0.9 {[}0.81, 1.01{]} \\
+\bottomrule()
+\end{longtable}
+
+\hypertarget{did-wildfire-exposure-stuff.}{%
+\section{DID wildfire exposure
+stuff.}\label{did-wildfire-exposure-stuff.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# function to produce proximity results tables}
+\NormalTok{DID\_RR\_vectors }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(fire\_exposure\_model) \{}
+\NormalTok{  did\_rr }\OtherTok{\textless{}{-}} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%04.2f"}\NormalTok{,}\FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(fire\_exposure\_model}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{4}\NormalTok{]), }\AttributeTok{digits =} \DecValTok{2}\NormalTok{))}
+\NormalTok{  did\_lw }\OtherTok{\textless{}{-}} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%04.2f"}\NormalTok{,}\FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(fire\_exposure\_model}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{4}\NormalTok{] }\SpecialCharTok{{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(fire\_exposure\_model)[}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{), }\AttributeTok{digits =} \DecValTok{2}\NormalTok{))}
+\NormalTok{  did\_up }\OtherTok{\textless{}{-}} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%04.2f"}\NormalTok{,}\FunctionTok{round}\NormalTok{(}\FunctionTok{exp}\NormalTok{(fire\_exposure\_model}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{4}\NormalTok{] }\SpecialCharTok{+} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{vcov}\NormalTok{(fire\_exposure\_model)[}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{]) }\SpecialCharTok{*} \FloatTok{1.96}\NormalTok{), }\AttributeTok{digits =} \DecValTok{2}\NormalTok{))}
+\NormalTok{  did\_row }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(did\_rr, }\StringTok{\textquotesingle{} [\textquotesingle{}}\NormalTok{, did\_lw, }\StringTok{\textquotesingle{}, \textquotesingle{}}\NormalTok{, did\_up, }\StringTok{\textquotesingle{}]\textquotesingle{}}\NormalTok{)}
+  \FunctionTok{return}\NormalTok{(did\_row)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{filenames }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}
+  \FunctionTok{here}\NormalTok{(}\StringTok{"analysis"}\NormalTok{, }\StringTok{"proximity\_analyses"}\NormalTok{, }\StringTok{"new\_results\_may28"}\NormalTok{),}
+  \AttributeTok{pattern =} \StringTok{"*.RDS"}\NormalTok{,}
+  \AttributeTok{full.names =} \ConstantTok{TRUE}
+\NormalTok{)}
+\NormalTok{all\_proximity\_models }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(}\AttributeTok{X =}\NormalTok{ filenames, }\AttributeTok{FUN =}\NormalTok{ readRDS)}
+
+\NormalTok{filenames }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}
+  \FunctionTok{here}\NormalTok{(}\StringTok{"analysis"}\NormalTok{, }\StringTok{"proximity\_analyses"}\NormalTok{, }\StringTok{"sensitivity\_results"}\NormalTok{),}
+  \AttributeTok{pattern =} \StringTok{"*.RDS"}\NormalTok{,}
+  \AttributeTok{full.names =} \ConstantTok{TRUE}
+\NormalTok{)}
+\NormalTok{s }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(}\AttributeTok{X =}\NormalTok{ filenames, }\AttributeTok{FUN =}\NormalTok{ readRDS)}
+
+
+\NormalTok{woolsey\_fire\_outpatient }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{20}\NormalTok{]]}
+\NormalTok{woolsey\_fire\_inpatient }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{18}\NormalTok{]]}
+\NormalTok{woolsey\_fire\_ED }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{14}\NormalTok{]]}
+\NormalTok{woolsey\_fire\_inpatient\_cardioresp }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{16}\NormalTok{]]}
+\NormalTok{woolsey\_fire\_ED\_cardioresp }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{12}\NormalTok{]]}
+
+\NormalTok{woolsey\_evac\_outpatient }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{19}\NormalTok{]]}
+\NormalTok{woolsey\_evac\_inpatient }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{17}\NormalTok{]]}
+\NormalTok{woolsey\_evac\_ED }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{13}\NormalTok{]]}
+\NormalTok{woolsey\_evac\_inpatient\_cardioresp }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{15}\NormalTok{]]}
+\NormalTok{woolsey\_evac\_ED\_cardioresp }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{11}\NormalTok{]]}
+
+\NormalTok{getty\_fire\_outpatient }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{10}\NormalTok{]]}
+\NormalTok{getty\_fire\_inpatient }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{8}\NormalTok{]]}
+\NormalTok{getty\_fire\_ED }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{4}\NormalTok{]]}
+\NormalTok{getty\_fire\_inpatient\_cardioresp }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{6}\NormalTok{]]}
+\NormalTok{getty\_fire\_ED\_cardioresp }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{2}\NormalTok{]]}
+
+\NormalTok{getty\_evac\_outpatient }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{9}\NormalTok{]]}
+\NormalTok{getty\_evac\_inpatient }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{7}\NormalTok{]]}
+\NormalTok{getty\_evac\_ED }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{3}\NormalTok{]]}
+\NormalTok{getty\_evac\_inpatient\_cardioresp }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{5}\NormalTok{]]}
+\NormalTok{getty\_evac\_ED\_cardioresp }\OtherTok{\textless{}{-}}\NormalTok{ all\_proximity\_models[[}\DecValTok{1}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# sensitivity tables}
+\NormalTok{woolsey\_evac\_outpatient\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{19}\NormalTok{]]}
+\NormalTok{woolsey\_evac\_inpatient\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{17}\NormalTok{]]}
+\NormalTok{woolsey\_evac\_ED\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{13}\NormalTok{]]}
+\NormalTok{woolsey\_evac\_inpatient\_cardioresp\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{15}\NormalTok{]]}
+\NormalTok{woolsey\_evac\_ED\_cadioresp\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{11}\NormalTok{]]}
+
+\NormalTok{woolsey\_fire\_outpatient\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{20}\NormalTok{]]}
+\NormalTok{woolsey\_fire\_inpatient\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{18}\NormalTok{]]}
+\NormalTok{woolsey\_fire\_ED\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{14}\NormalTok{]]}
+\NormalTok{woolsey\_fire\_inpatient\_cardioresp\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{16}\NormalTok{]]}
+\NormalTok{woolsey\_fire\_ED\_cardioresp\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{12}\NormalTok{]]}
+
+\NormalTok{getty\_evac\_outpatient\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{9}\NormalTok{]]}
+\NormalTok{getty\_evac\_inpatient\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{7}\NormalTok{]]}
+\NormalTok{getty\_evac\_ED\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{3}\NormalTok{]]}
+\NormalTok{getty\_evac\_inpatient\_cardioresp\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{5}\NormalTok{]]}
+\NormalTok{getty\_evac\_ED\_cadioresp\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{1}\NormalTok{]]}
+
+\NormalTok{getty\_fire\_outpatient\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{10}\NormalTok{]]}
+\NormalTok{getty\_fire\_inpatient\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{8}\NormalTok{]]}
+\NormalTok{getty\_fire\_ED\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{4}\NormalTok{]]}
+\NormalTok{getty\_fire\_inpatient\_cardioresp\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{6}\NormalTok{]]}
+\NormalTok{getty\_fire\_ED\_cardioresp\_sensitivity }\OtherTok{\textless{}{-}}\NormalTok{ s[[}\DecValTok{2}\NormalTok{]]}
+
+\CommentTok{\# woolsey sensitivity tables}
+\NormalTok{sens1 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_evac\_outpatient\_sensitivity)}
+\NormalTok{sens2 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_evac\_inpatient\_sensitivity)}
+\NormalTok{sens3 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_evac\_ED\_sensitivity)}
+\NormalTok{sens4 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_evac\_inpatient\_cardioresp\_sensitivity)}
+\NormalTok{sens5 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_evac\_ED\_cadioresp\_sensitivity)}
+
+\NormalTok{woolsey\_evac\_sensitivity }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(sens1, sens2, sens3, sens4, sens5)}
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(woolsey\_evac\_sensitivity)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule()
+\endhead
+sens1 & 0.88 {[}0.78, 1.00{]} \\
+sens2 & 1.22 {[}0.82, 1.82{]} \\
+sens3 & 1.05 {[}0.77, 1.44{]} \\
+sens4 & 1.30 {[}0.86, 1.95{]} \\
+sens5 & 1.00 {[}0.71, 1.40{]} \\
+\bottomrule()
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# woolsey tables}
+\CommentTok{\# q1 \textless{}{-} DID\_RR\_vectors(woolsey\_both\_outpatient)}
+\CommentTok{\# q2 \textless{}{-} DID\_RR\_vectors(woolsey\_both\_inpatient)}
+\CommentTok{\# q3 \textless{}{-} DID\_RR\_vectors(woolsey\_both\_ED)}
+\CommentTok{\# q4 \textless{}{-} DID\_RR\_vectors(woolsey\_both\_inpatient\_cardioresp)}
+\CommentTok{\# q5 \textless{}{-} DID\_RR\_vectors(woolsey\_both\_ED\_cardioresp)}
+\CommentTok{\# }
+\CommentTok{\# woolsey\_fire\_both \textless{}{-} rbind(q1, q2, q3, q4, q5)}
+\CommentTok{\# knitr::kable(woolsey\_fire\_both)}
+
+\NormalTok{s1 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_evac\_outpatient)}
+\NormalTok{s2 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_evac\_inpatient)}
+\NormalTok{s3 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_evac\_ED)}
+\NormalTok{s4 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_evac\_inpatient\_cardioresp)}
+\NormalTok{s5 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_evac\_ED\_cardioresp)}
+
+\NormalTok{woolsey\_fire\_evac }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(s1, s2, s3, s4, s5)}
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(woolsey\_fire\_evac)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule()
+\endhead
+s1 & 0.86 {[}0.72, 1.03{]} \\
+s2 & 1.53 {[}0.90, 2.62{]} \\
+s3 & 1.18 {[}0.78, 1.80{]} \\
+s4 & 1.72 {[}1.00, 2.96{]} \\
+s5 & 1.13 {[}0.72, 1.78{]} \\
+\bottomrule()
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sens11 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_fire\_outpatient\_sensitivity)}
+\NormalTok{sens22 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_fire\_inpatient\_sensitivity)}
+\NormalTok{sens33 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_fire\_ED\_sensitivity)}
+\NormalTok{sens44 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_fire\_inpatient\_cardioresp\_sensitivity)}
+\NormalTok{sens55 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_fire\_ED\_cardioresp\_sensitivity)}
+
+\NormalTok{woolsey\_fire\_sensitivity }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(sens11, sens22, sens33, sens44, sens55)}
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(woolsey\_fire\_sensitivity)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule()
+\endhead
+sens11 & 0.89 {[}0.78, 1.02{]} \\
+sens22 & 1.29 {[}0.85, 1.96{]} \\
+sens33 & 1.11 {[}0.80, 1.54{]} \\
+sens44 & 1.40 {[}0.91, 2.15{]} \\
+sens55 & 1.07 {[}0.75, 1.52{]} \\
+\bottomrule()
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{t1 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_fire\_outpatient)}
+\NormalTok{t2 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_fire\_inpatient)}
+\NormalTok{t3 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_fire\_ED)}
+\NormalTok{t4 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_fire\_inpatient\_cardioresp)}
+\NormalTok{t5 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(woolsey\_fire\_ED\_cardioresp)}
+
+\NormalTok{woolsey\_fire\_only }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(t1, t2, t3, t4, t5)}
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(woolsey\_fire\_only)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule()
+\endhead
+t1 & 0.89 {[}0.79, 1.00{]} \\
+t2 & 1.35 {[}0.93, 1.96{]} \\
+t3 & 1.13 {[}0.85, 1.49{]} \\
+t4 & 1.45 {[}0.99, 2.12{]} \\
+t5 & 1.07 {[}0.78, 1.45{]} \\
+\bottomrule()
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# getty fire sensitivity}
+\NormalTok{gs11 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_fire\_outpatient\_sensitivity)}
+\NormalTok{gs22 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_fire\_inpatient\_sensitivity)}
+\NormalTok{gs33 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_fire\_ED\_sensitivity)}
+\NormalTok{gs44 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_fire\_inpatient\_cardioresp\_sensitivity)}
+\NormalTok{gs55 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_fire\_ED\_cardioresp\_sensitivity)}
+
+\CommentTok{\# getty evac sensitivity}
+\NormalTok{ge11 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_evac\_outpatient\_sensitivity)}
+\NormalTok{ge22 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_evac\_inpatient\_sensitivity)}
+\NormalTok{ge33 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_evac\_ED\_sensitivity)}
+\NormalTok{ge44 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_evac\_inpatient\_cardioresp\_sensitivity)}
+\NormalTok{ge55 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_evac\_ED\_cadioresp\_sensitivity)}
+
+
+\CommentTok{\# getty tables}
+\NormalTok{v1 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_evac\_outpatient)}
+\NormalTok{v2 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_evac\_inpatient)}
+\NormalTok{v3 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_evac\_ED)}
+\NormalTok{v4 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_evac\_inpatient\_cardioresp)}
+\NormalTok{v5 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_evac\_ED\_cardioresp)}
+
+\NormalTok{getty\_fire\_evac }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(v1, v2, v3, v4, v5)}
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(getty\_fire\_evac)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule()
+\endhead
+v1 & 0.88 {[}0.69, 1.12{]} \\
+v2 & 0.19 {[}0.02, 1.60{]} \\
+v3 & 0.65 {[}0.30, 1.42{]} \\
+v4 & 0.21 {[}0.02, 1.73{]} \\
+v5 & 0.66 {[}0.27, 1.62{]} \\
+\bottomrule()
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w1 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_fire\_outpatient)}
+\NormalTok{w2 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_fire\_inpatient)}
+\NormalTok{w3 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_fire\_ED)}
+\NormalTok{w4 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_fire\_inpatient\_cardioresp)}
+\NormalTok{w5 }\OtherTok{\textless{}{-}} \FunctionTok{DID\_RR\_vectors}\NormalTok{(getty\_fire\_ED\_cardioresp)}
+
+\NormalTok{getty\_fire\_only }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(w1, w2, w3, w4, w5)}
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(getty\_fire\_only)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule()
+\endhead
+w1 & 1.02 {[}0.93, 1.13{]} \\
+w2 & 0.93 {[}0.60, 1.45{]} \\
+w3 & 0.97 {[}0.73, 1.27{]} \\
+w4 & 0.96 {[}0.61, 1.50{]} \\
+w5 & 0.92 {[}0.67, 1.26{]} \\
+\bottomrule()
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{add\_case\_name }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(fire\_dataframe, casename)\{}
+\NormalTok{  fire\_dataframe }\OtherTok{\textless{}{-}}\NormalTok{ fire\_dataframe }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Exposure =} \FunctionTok{paste0}\NormalTok{(casename))}
+  \FunctionTok{return}\NormalTok{(fire\_dataframe)}
+\NormalTok{\}}
+
+
+\NormalTok{woolsey\_fire\_evac }\OtherTok{\textless{}{-}}
+  \FunctionTok{add\_case\_name}\NormalTok{(}\FunctionTok{as.data.frame}\NormalTok{(woolsey\_fire\_evac), }\StringTok{\textquotesingle{}Woolsey evacuation zone + 10 km\textquotesingle{}}\NormalTok{)}
+\NormalTok{woolsey\_fire\_only }\OtherTok{\textless{}{-}}
+  \FunctionTok{add\_case\_name}\NormalTok{(}\FunctionTok{as.data.frame}\NormalTok{(woolsey\_fire\_only), }\StringTok{\textquotesingle{}Woolsey fire boundary + 20 km\textquotesingle{}}\NormalTok{)}
+\NormalTok{getty\_fire\_evac }\OtherTok{\textless{}{-}}
+  \FunctionTok{add\_case\_name}\NormalTok{(}\FunctionTok{as.data.frame}\NormalTok{(getty\_fire\_evac), }\StringTok{\textquotesingle{}Getty evacuation zone + 10 km\textquotesingle{}}\NormalTok{)}
+\NormalTok{getty\_fire\_only}\OtherTok{\textless{}{-}}
+  \FunctionTok{add\_case\_name}\NormalTok{(}\FunctionTok{as.data.frame}\NormalTok{(getty\_fire\_only), }\StringTok{\textquotesingle{}Getty fire boundary + 20 km\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# create plot Joan wanted.}
+\NormalTok{all\_fires }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(woolsey\_fire\_evac,}
+\NormalTok{                   woolsey\_fire\_only, }
+\NormalTok{                   getty\_fire\_evac, }
+\NormalTok{                   getty\_fire\_only)}
+\NormalTok{all\_fires }\OtherTok{\textless{}{-}}\NormalTok{ all\_fires }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{RR =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{substr}\NormalTok{(V1, }\AttributeTok{start =} \DecValTok{1}\NormalTok{, }\AttributeTok{stop =} \DecValTok{4}\NormalTok{)),}
+                                  \AttributeTok{lw =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{substr}\NormalTok{(V1, }\AttributeTok{start =} \DecValTok{7}\NormalTok{, }\AttributeTok{stop =} \DecValTok{10}\NormalTok{)), }
+                                  \AttributeTok{up =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{substr}\NormalTok{(V1, }\AttributeTok{start =} \DecValTok{13}\NormalTok{, }\AttributeTok{stop =} \DecValTok{16}\NormalTok{)))}
+\NormalTok{all\_fires }\OtherTok{\textless{}{-}}\NormalTok{ all\_fires }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(Exposure) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{visit\_type =} \FunctionTok{row\_number}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{woolsey }\OtherTok{\textless{}{-}}\NormalTok{ all\_fires[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{,]}
+\NormalTok{pd }\OtherTok{\textless{}{-}} \FunctionTok{position\_dodge}\NormalTok{(}\FloatTok{0.8}\NormalTok{)}
+\NormalTok{woolsey }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ visit\_type, }\AttributeTok{y =}\NormalTok{ RR, }
+                       \AttributeTok{shape =}\NormalTok{ Exposure)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{position =}\NormalTok{ pd) }\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin =}\NormalTok{ lw, }\AttributeTok{ymax =}\NormalTok{ up), }\AttributeTok{position =}\NormalTok{ pd) }\SpecialCharTok{+} 
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"RR for difference in differences estimator"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Healthcare visit type"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_hline}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{yintercept =} \DecValTok{1}\NormalTok{), }\AttributeTok{linetype =} \StringTok{\textquotesingle{}dashed\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{produce_results_tables_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{getty }\OtherTok{\textless{}{-}}\NormalTok{ all\_fires[}\DecValTok{11}\SpecialCharTok{:}\DecValTok{20}\NormalTok{,]}
+\NormalTok{pd }\OtherTok{\textless{}{-}} \FunctionTok{position\_dodge}\NormalTok{(}\FloatTok{0.8}\NormalTok{)}
+\NormalTok{getty }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ visit\_type, }\AttributeTok{y =}\NormalTok{ RR, }
+                       \AttributeTok{shape =}\NormalTok{ Exposure)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{position =}\NormalTok{ pd) }\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin =}\NormalTok{ lw, }\AttributeTok{ymax =}\NormalTok{ up), }\AttributeTok{position =}\NormalTok{ pd) }\SpecialCharTok{+} 
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"RR for difference in differences estimator"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Healthcare visit type"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_hline}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{yintercept =} \DecValTok{1}\NormalTok{), }\AttributeTok{linetype =} \StringTok{\textquotesingle{}dashed\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{produce_results_tables_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{getty }\OtherTok{\textless{}{-}}\NormalTok{ all\_fires[}\DecValTok{11}\SpecialCharTok{:}\DecValTok{20}\NormalTok{,] }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{visit\_type =} \FunctionTok{as.factor}\NormalTok{(visit\_type))}
+\NormalTok{pd }\OtherTok{\textless{}{-}} \FunctionTok{position\_dodge}\NormalTok{(}\FloatTok{0.8}\NormalTok{)}
+\NormalTok{getty }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ RR, }\AttributeTok{y =}\NormalTok{ visit\_type, }
+                       \AttributeTok{shape =}\NormalTok{ Exposure, }\AttributeTok{color =}\NormalTok{ visit\_type)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{position =}\NormalTok{ ggstance}\SpecialCharTok{::}\FunctionTok{position\_dodgev}\NormalTok{(}\FloatTok{0.8}\NormalTok{), }\AttributeTok{size =} \DecValTok{7}\NormalTok{, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ visit\_type)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmin =}\NormalTok{ lw, }\AttributeTok{xmax =}\NormalTok{ up), }\AttributeTok{position =}\NormalTok{ ggstance}\SpecialCharTok{::}\FunctionTok{position\_dodgev}\NormalTok{(}\FloatTok{0.8}\NormalTok{),}
+                \AttributeTok{size =} \FloatTok{1.5}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"RR for exposure to fire or evacution with 95\% CI"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Healthcare visit type"}\NormalTok{) }\SpecialCharTok{+}
+   \FunctionTok{scale\_x\_log10}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{xintercept =} \DecValTok{1}\NormalTok{), }\AttributeTok{linetype =} \StringTok{\textquotesingle{}dashed\textquotesingle{}}\NormalTok{, }\AttributeTok{color =} \StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, }\AttributeTok{size =} \FloatTok{1.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{30}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{30}\NormalTok{),}
+        \AttributeTok{axis.text.y =} \FunctionTok{element\_blank}\NormalTok{()) }\SpecialCharTok{+}
+  \CommentTok{\#scale\_color\_viridis(discrete = TRUE, option = "B") +}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{\textquotesingle{}none\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{"cadetblue"}\NormalTok{,}
+                                \StringTok{\textasciigrave{}}\AttributeTok{2}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{"darkolivegreen"}\NormalTok{,}
+                                \StringTok{\textasciigrave{}}\AttributeTok{3}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{"darkorchid"}\NormalTok{,}
+                                \StringTok{\textasciigrave{}}\AttributeTok{4}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{"red"}\NormalTok{,}
+                                \StringTok{\textasciigrave{}}\AttributeTok{5}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{\textquotesingle{}orange\textquotesingle{}}\NormalTok{)) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{produce_results_tables_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\#scale\_color\_manual(values = wes\_palette("Zissou1", 5, type = c("discrete")))\# + }
+  
+\FunctionTok{ggsave}\NormalTok{(}\AttributeTok{filename =} \FunctionTok{here}\NormalTok{(}\StringTok{"writing"}\NormalTok{, }\StringTok{"figures"}\NormalTok{, }\StringTok{"automated\_results\_tables"}\NormalTok{, }\StringTok{"getty\_fire\_RR\_plot.pdf"}\NormalTok{), }\AttributeTok{width =} \FloatTok{8.5}\NormalTok{, }\AttributeTok{height =} \FloatTok{8.5}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{woolsey }\OtherTok{\textless{}{-}}
+\NormalTok{  all\_fires[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, ] }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{visit\_type =} \FunctionTok{as.factor}\NormalTok{(visit\_type))}
+\NormalTok{pd }\OtherTok{\textless{}{-}} \FunctionTok{position\_dodge}\NormalTok{(}\FloatTok{0.8}\NormalTok{)}
+\NormalTok{woolsey }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}
+  \AttributeTok{x =}\NormalTok{ RR,}
+  \AttributeTok{y =}\NormalTok{ visit\_type,}
+  \AttributeTok{shape =}\NormalTok{ Exposure,}
+  \AttributeTok{color =}\NormalTok{ visit\_type}
+\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_log10}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}
+    \AttributeTok{position =}\NormalTok{ ggstance}\SpecialCharTok{::}\FunctionTok{position\_dodgev}\NormalTok{(}\FloatTok{0.8}\NormalTok{),}
+    \AttributeTok{size =} \DecValTok{7}\NormalTok{,}
+    \FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ visit\_type)}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{xmin =}\NormalTok{ lw, }\AttributeTok{xmax =}\NormalTok{ up),}
+                \AttributeTok{position =}\NormalTok{ ggstance}\SpecialCharTok{::}\FunctionTok{position\_dodgev}\NormalTok{(}\FloatTok{0.8}\NormalTok{),}
+                \AttributeTok{size =} \FloatTok{1.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"RR for exposure to fire or evacution with 95\% CI"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Healthcare visit type"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}
+    \FunctionTok{aes}\NormalTok{(}\AttributeTok{xintercept =} \DecValTok{1}\NormalTok{),}
+    \AttributeTok{linetype =} \StringTok{\textquotesingle{}dashed\textquotesingle{}}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{,}
+    \AttributeTok{size =} \FloatTok{1.2}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{30}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{30}\NormalTok{),}
+        \AttributeTok{axis.text.y =} \FunctionTok{element\_blank}\NormalTok{()) }\SpecialCharTok{+}
+  
+  \CommentTok{\#scale\_color\_viridis(discrete = TRUE, option = "B") +}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}
+    \AttributeTok{values =} \FunctionTok{c}\NormalTok{(}
+     \StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{"cadetblue"}\NormalTok{,}
+                                \StringTok{\textasciigrave{}}\AttributeTok{2}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{"darkolivegreen"}\NormalTok{,}
+                                \StringTok{\textasciigrave{}}\AttributeTok{3}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{"darkorchid"}\NormalTok{,}
+                                \StringTok{\textasciigrave{}}\AttributeTok{4}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{"red"}\NormalTok{,}
+                                \StringTok{\textasciigrave{}}\AttributeTok{5}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{\textquotesingle{}orange\textquotesingle{}}\NormalTok{)}
+\NormalTok{  ) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{produce_results_tables_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.key.size =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## List of 1
+##  $ legend.key.size: num 2
+##  - attr(*, "class")= chr [1:2] "theme" "gg"
+##  - attr(*, "complete")= logi FALSE
+##  - attr(*, "validate")= logi TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggsave}\NormalTok{(}
+  \AttributeTok{filename =} \FunctionTok{here}\NormalTok{(}
+    \StringTok{"writing"}\NormalTok{,}
+    \StringTok{"figures"}\NormalTok{,}
+    \StringTok{"automated\_results\_tables"}\NormalTok{,}
+    \StringTok{"woolsey\_fire\_RR\_plot.pdf"}
+\NormalTok{  ),}
+  \AttributeTok{width =} \FloatTok{8.5}\NormalTok{,}
+  \AttributeTok{height =} \FloatTok{8.5}
+\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
