@@ -1,0 +1,14 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.DS_Store
+/02_data
+*.csv
+*.nc
+*.rst
+*.RDS
+/data_pm_analyses
+/data_proximity_analyses
+/raw_data
+/data_checks
